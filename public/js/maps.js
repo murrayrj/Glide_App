@@ -6,6 +6,7 @@ var searchTagValue = ''; // <--- Value of the input form
 var loc = ''; // <--- Coordinates of the search, return i.e. {A: 48.856614, F: 2.3522219000000177}
 var lat = 51.534488;
 var log = -0.189897;
+var map = '';
 
 
 // Google maps style
@@ -48,11 +49,14 @@ function initialize() {
 }
 
 // Google Maps render a map on the page with the style describe prevously
-function renderMap() {
-  google.maps.event.addDomListener(window, 'load', initialize);
-}
 
-renderMap();
+google.maps.event.addDomListener(window, 'load', initialize);
+
+//This function it's not working
+function refreshMap() {
+  console.log('renderMap');
+  google.maps.event.trigger(map, 'resize');
+}
 
 
 //Geocoder
@@ -84,7 +88,7 @@ function searchFunction (event) {
 //Event listeners
 $(document).ready(function(){ 
   searchTagForm.on('submit', searchFunction); // Event listener for the form,
-  searchTagForm.on('submit', renderMap); // Event listener for the form,
+  searchTagForm.on('submit', refreshMap); // Event listener for the form,
 })
 
 
