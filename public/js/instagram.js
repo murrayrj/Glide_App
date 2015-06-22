@@ -2,7 +2,7 @@ var videos = [];
 
   console.log(object);
   $.ajax({
-    url: 'https://api.instagram.com/v1/tags/' +  object[0].object_id + '?client_id=CLIENT_ID',
+    url: 'https://api.instagram.com/v1/tags/search?q=' +  object[0].object_id + '?client_id=CLIENT_ID',
     dataType: 'jsonp'
   }).done(function (response) {
     console.log(response);
