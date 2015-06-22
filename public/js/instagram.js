@@ -5,9 +5,7 @@ var searchTag = $('#search_tag'); // <--Search input folder
 var searchTagValue = ''; // <--- Value of the input form
 var loc = ''; // <--- Coordinates of the search, return i.e. {A: 48.856614, F: 2.3522219000000177} 
 
-
-// Google maps 
-
+// Render a map when the page loads
 function initialize() {
   var styles = [
   {
@@ -32,7 +30,7 @@ function initialize() {
   var styledMap = new google.maps.StyledMapType(styles,{
     name: "Styled Map"
   });
-  var mapCanvas = document.getElementById('map-canvas');
+  var mapCanvas = $('#map-canvas');
   var mapOptions = {
     center: new google.maps.LatLng(51.534488, -0.189897),
     zoom: 15,
@@ -54,7 +52,7 @@ var geocoder = new google.maps.Geocoder();
 
 // This function return the input value as coordinates and store it on a variables called loc
 function searchFunction (event) { 
-  event.preventDefault();
+  // event.preventDefault();
   searchTagValue = $('#search_tag').val();
     geocoder.geocode(
         {'address': searchTagValue},
@@ -72,7 +70,6 @@ function searchFunction (event) {
 
 //Event listeners
 $(document).ready(function(){ 
-  searchTagForm.on('submit', searchFunction); // Event listener for the form,
+  searchTagForm.on('submit', searchFunction);  // Event listener for the form,
+  // searchTagForm.on('submit', renderNewMap); // Event listener to create a new map
 })
-
-
