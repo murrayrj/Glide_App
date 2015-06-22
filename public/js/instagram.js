@@ -1,18 +1,15 @@
 var videos = [];
-
-  console.log(object);
-  $.ajax({
-    url: 'https://api.instagram.com/v1/tags/search?q=' +  object[0].object_id + '?client_id=CLIENT_ID',
-    dataType: 'jsonp'
-  }).done(function (response) {
-    console.log(response);
-    console.log(response.data[1]);
-    if (videos.indexOf(response.data[0].id) === -1 && response.data[0].type === "video") {
-      $('#video-container').prepend('<li class="animated bounceInLeft"><video src="' + response.data[0].videos.low_resolution.url + '" controls></video></li>');
-      videos.push(response.data[0].id);
-    } else {
-      console.log('duplicate');
+var i;
+$.ajax({
+  url: 'https://api.instagram.com/v1/tags/videooftheday/media/recent?client_id=fee1f7a9b22c41149f86e7a44f199935',
+  dataType: 'jsonp'
+}).done(function (response) {
+  console.log(response);
+  for (i = 0; i < 20; i++) {
+    if (response.data[i].type === "video") {
+      $('#video-container').prepend('<li><video src="' + response.data[i].videos.low_resolution.url + '" controls></video></li>');
+      videos.push(response.data[i].id);
     }
-  });
+  }
 });
 

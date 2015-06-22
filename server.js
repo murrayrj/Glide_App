@@ -5,6 +5,7 @@ var morgan = require('morgan');
 var bodyParser = require('body-parser');
 var instagram = require('instagram-node-lib');
 var port = process.env.PORT || 3000;
+var i;
 
 app.use(morgan('dev'));
 app.use(bodyParser.json());
@@ -13,20 +14,20 @@ app.use(express.static(__dirname + '/public'));
 app.set('views', './views');
 app.set('view engine', 'ejs');
 
-instagram.set('client_id', 'client_id');
-instagram.set('client_secret', 'client_secret');
+instagram.set('client_id', process.env.INSTAGRAM_CLIENT_ID);
+instagram.set('client_secret', process.env.INSTAGRAM_CLIENT_SECRET);
 
 instagram.set('callback_url', 'http://4f3858c8.ngrok.io/callback');
 instagram.set('maxSockets', 50);
 
-var tags = ['videos', 'videooftheday', 'videogram'];
+var tags = ['videooftheday'];
 
-for (var i = 0; i < tags.length; i++) {
-  instagram.subscriptions.subscribe({ 
-    object: 'tag', 
+for (i = 0; i < tags.length; i++) {
+  instagram.subscriptions.subscribe({
+    object: 'tag',
     object_id: tags[i]
   });
-};
+}
 
 app.get('/', function(req, res) {
   res.render('index');

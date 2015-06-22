@@ -10,56 +10,56 @@ db.Tag.collection.remove();
 
 db.Location.create({
   name: 'Amsterdam',
-}, function(err, location){
+}, function (err, location) {
   db.Tag.create({
     text: 'amsterdam, water, vangoghmuseum'
-  }, function(err, tag){
+  }, function (err, tag) {
     location.tags.push(tag);
     location.save();
     console.log('data seeded');
     //Take care with process.exit(), this will break the code
     // process.exit()
-  })
+  });
 });
 
 db.Location.create({
   name: 'Tower of London',
-}, function(err, location){
+}, function (err, location) {
   db.Tag.create({
     text: 'thames, towerbridge, toweroflondon'
-  }, function(err, tag){
+  }, function (err, tag) {
     location.tags.push(tag);
     location.save();
     console.log('data seeded');
     //Take care with process.exit(), this will break the code
     // process.exit()
-  })
+  });
 });
 
 db.Location.create({
   name: 'Bologna',
-}, function(err, location){
+}, function (err, location) {
   db.Tag.create({
     name: 'provincia, bologna'
-  }, function(err, tag){
+  }, function (err, tag) {
     location.tags.push(tag);
     location.save();
     console.log('data seeded');
     //Take care with process.exit(), this will break the code
     // process.exit()
-  })
+  });
 });
 
 db.Location.create({
   name: 'Notre-Dame de Paris',
-}, function(err, location){
+}, function (err, location) {
   db.Tag.create({
     name: 'notredame, laseine'
-  }, function(err, tag){
+  }, function (err, tag) {
     location.tags.push(tag);
     location.save();
     console.log('data seeded');
     //Take care with process.exit(), this will break the code
     // process.exit()
-  })
+  });
 });
