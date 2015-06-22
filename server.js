@@ -47,5 +47,5 @@ app.post('/callback', function(req, res) {
 });
 
 server.listen(port, function() {
-  console.log('tj is cool!');
+  console.log('Pedro, Laura and Richard are cool!');
 });
