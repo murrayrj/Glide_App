@@ -20,7 +20,7 @@ instagram.set('client_secret', process.env.INSTAGRAM_CLIENT_SECRET);
 instagram.set('callback_url', 'http://4f3858c8.ngrok.io/callback');
 instagram.set('maxSockets', 50);
 
-var tags = ['videooftheday'];
+var tags = ['nyc'];
 
 for (i = 0; i < tags.length; i++) {
   instagram.subscriptions.subscribe({

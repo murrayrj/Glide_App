@@ -1,7 +1,7 @@
 var videos = [];
 var i;
 $.ajax({
-  url: 'https://api.instagram.com/v1/tags/videooftheday/media/recent?client_id=fee1f7a9b22c41149f86e7a44f199935',
+  url: 'https://api.instagram.com/v1/tags/nyc/media/recent?client_id=fee1f7a9b22c41149f86e7a44f199935',
   dataType: 'jsonp'
 }).done(function (response) {
   console.log(response);
