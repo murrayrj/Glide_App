@@ -1,0 +1,10 @@
+body {
+	background-color: blue;
+}
+
+
+#map-canvas {
+	width: 90%;
+	height: 400px;
+	background-color: #ccc;
+}
