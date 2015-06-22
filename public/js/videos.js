@@ -1,4 +1,4 @@
-var socket = io('http://63211216.ngrok.io');
+var socket = io('http://64a68ea2.ngrok.io');
 var videos = [];
 var i;
 

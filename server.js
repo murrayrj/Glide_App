@@ -1,4 +1,4 @@
-var express = require('express');
+  var express = require('express');
 var app = express();
 var server = require('http').createServer(app);
 var io = require('socket.io')(server);
@@ -18,7 +18,7 @@ app.set('view engine', 'ejs');
 instagram.set('client_id', process.env.INSTAGRAM_CLIENT_ID);
 instagram.set('client_secret', process.env.INSTAGRAM_CLIENT_SECRET);
 
-instagram.set('callback_url', 'http://63211216.ngrok.io/callback');
+instagram.set('callback_url', 'http://64a68ea2.ngrok.io/callback');
 instagram.set('maxSockets', 50);
 
 var tags = ['videooftheday'];
@@ -42,12 +42,6 @@ app.post('/callback', function(req, res) {
   console.log(req.body);
 
   var notification = req.body;
-<<<<<<< HEAD
-=======
-
-  io.sockets.emit('instagram', notification);
-});
->>>>>>> b13e64f645b11d745f82c1a22b0afc655ace7741
 
   io.sockets.emit('instagram', notification);
 });
