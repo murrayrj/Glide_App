@@ -22,4 +22,5 @@ var request = socket.on('instagram', function () {
         }
       }
     }
-  }
+  });
+});
