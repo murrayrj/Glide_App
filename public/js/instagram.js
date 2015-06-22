@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // var socket = io('http://4f3858c8.ngrok.io');
 // var photos = [];
 
@@ -57,6 +58,23 @@ function initialize() {
 ];
   var styledMap = new google.maps.StyledMapType(styles,{
     name: "Styled Map"
+=======
+var videos = [];
+
+  console.log(object);
+  $.ajax({
+    url: 'https://api.instagram.com/v1/tags/search?q=' +  object[0].object_id + '?client_id=CLIENT_ID',
+    dataType: 'jsonp'
+  }).done(function (response) {
+    console.log(response);
+    console.log(response.data[1]);
+    if (videos.indexOf(response.data[0].id) === -1 && response.data[0].type === "video") {
+      $('#video-container').prepend('<li class="animated bounceInLeft"><video src="' + response.data[0].videos.low_resolution.url + '" controls></video></li>');
+      videos.push(response.data[0].id);
+    } else {
+      console.log('duplicate');
+    }
+>>>>>>> b9322d8b9896769920e8b687e7a6996915cd9aed
   });
   var mapCanvas = document.getElementById('map-canvas');
   var mapOptions = {

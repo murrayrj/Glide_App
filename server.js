@@ -1,7 +1,6 @@
 var express = require('express');
 var app = express();
 var server = require('http').createServer(app);
-var io = require('socket.io')(server);
 var morgan = require('morgan');
 var bodyParser = require('body-parser');
 var instagram = require('instagram-node-lib');
@@ -41,8 +40,6 @@ app.post('/callback', function(req, res) {
   console.log(req.body);
 
   var notification = req.body;
-
-  io.sockets.emit('instagram', notification);
 });
 
 server.listen(port, function() {

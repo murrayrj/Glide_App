@@ -9,9 +9,13 @@ var TagSchema = new mongoose.Schema({
 });
 
 var LocationSchema = new mongoose.Schema({
-  name: {
+  text: {
     type: String,
-    default:""
+    default: ""
+  },
+  count: {
+    type: Number,
+    default: 0
   },
   tags: [TagSchema]
 });
