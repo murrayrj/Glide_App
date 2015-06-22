@@ -43,6 +43,6 @@ app.post('/callback', function(req, res) {
 });
 
 server.listen(port, function() {
-  console.log('tj is cool!');
+  console.log('Laura, Pedro & Richard are cool!');
 });
 

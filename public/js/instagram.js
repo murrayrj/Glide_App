@@ -25,46 +25,80 @@
 
 
 // Google maps 
-console.log('hello')
 
-function initialize() {
-  var styles = [
-  {
-    featureType: "all",
-    stylers: [
-    { saturation: -80 
-    }]},
-    {
-      featureType: "road.arterial",
-      elementType: "geometry",
-      stylers: [
-      { hue: "#00ffee" },
-      { saturation: 50 }
-      ]},
-      {
-        featureType: "poi.business",
-        elementType: "labels",
-        stylers: [{
-         visibility: "off" 
-        }]}
-];
-  var styledMap = new google.maps.StyledMapType(styles,{
-    name: "Styled Map"
-  });
-  var mapCanvas = document.getElementById('map-canvas');
-  var mapOptions = {
-    center: new google.maps.LatLng(51.534488, -0.189897),
-    zoom: 15,
-    mapTypeControlOptions: {
-      mapTypeIds: [google.maps.MapTypeId.ROADMAP, 'map_style']
-    }
-  };
-  var map = new google.maps.Map(mapCanvas, mapOptions);
-  map.mapTypes.set('map_style', styledMap);
-  map.setMapTypeId('map_style');
-}
+var search = '';
+var searchTags = $('#search_tags');
 
-google.maps.event.addDomListener(window, 'load', initialize);
+console.log('map')
+
+// function initialize() {
+//   var styles = [
+//   {
+//     featureType: "all",
+//     stylers: [
+//     { saturation: -80 
+//     }]},
+//     {
+//       featureType: "road.arterial",
+//       elementType: "geometry",
+//       stylers: [
+//       { hue: "#00ffee" },
+//       { saturation: 50 }
+//       ]},
+//       {
+//         featureType: "poi.business",
+//         elementType: "labels",
+//         stylers: [{
+//          visibility: "off" 
+//         }]}
+// ];
+//   var styledMap = new google.maps.StyledMapType(styles,{
+//     name: "Styled Map"
+//   });
+//   var mapCanvas = document.getElementById('map-canvas');
+//   var mapOptions = {
+//     center: new google.maps.LatLng(51.534488, -0.189897),
+//     zoom: 15,
+//     mapTypeControlOptions: {
+//       mapTypeIds: [google.maps.MapTypeId.ROADMAP, 'map_style']
+//     }
+//   };
+//   var map = new google.maps.Map(mapCanvas, mapOptions);
+//   map.mapTypes.set('map_style', styledMap);
+//   map.setMapTypeId('map_style');
+// }
+
+// google.maps.event.addDomListener(window, 'load', initialize);
+
+
+//Geocoder
+
+var geocoder = new google.maps.Geocoder();
+function search() {
+  console.log('search');
+    // geocoder.geocode(
+    //     {'address': searchTags.value}, 
+    //     function(results, status) { 
+    //         if (status == google.maps.GeocoderStatus.OK) { 
+    //             var loc = results[0].geometry.location;
+    //             // use loc.lat(), loc.lng()
+    //             console.log(loc);
+
+    //         } 
+    //         else {
+    //             alert("Not found: " + status); 
+    //         } 
+    //     }
+    //     debugger
+    // );
+};
+
+//Event listeners
+$(document).ready(function(){ 
+  $('#search_tags').on('click', search);
+})
+
+
 
 
 
