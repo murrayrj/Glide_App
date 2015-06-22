@@ -29,7 +29,7 @@ function initialize() {
   var styledMap = new google.maps.StyledMapType(styles,{
     name: "Styled Map"
   });
-  var mapCanvas = $('#map-canvas');
+  var mapCanvas = document.getElementById('map-canvas');
   var mapOptions = {
     center: new google.maps.LatLng(51.534488, -0.189897),
     zoom: 15,
@@ -51,7 +51,7 @@ var geocoder = new google.maps.Geocoder();
 
 // This function return the input value as coordinates and store it on a variables called loc
 function searchFunction (event) { 
-  // event.preventDefault();
+  event.preventDefault();
   searchTagValue = $('#search_tag').val();
     geocoder.geocode(
         {'address': searchTagValue},
@@ -67,8 +67,15 @@ function searchFunction (event) {
     );
 };
 
+//Render a new map
+
+function renderNewMap (event) {
+  console.log('renderNewMap')
+
+}
+
 //Event listeners
 $(document).ready(function(){ 
   searchTagForm.on('submit', searchFunction);  // Event listener for the form,
-  // searchTagForm.on('submit', renderNewMap); // Event listener to create a new map
+  searchTagForm.on('submit', renderNewMap); // Event listener to create a new map
 })
