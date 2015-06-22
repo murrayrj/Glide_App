@@ -14,7 +14,7 @@ var request = socket.on('instagram', function () {
     console.log(response);
     for (i = 0; i < 20; i++) {
       if (response.data[i].type === "video" && videos.indexOf(response.data[i].id) === -1) {
-        if (videos.length > 9) {
+        if (videos.length >= 5) {
           return;
         } else {
           $('#video-container').prepend('<li><video src="' + response.data[i].videos.low_resolution.url + '" controls></video></li>');
