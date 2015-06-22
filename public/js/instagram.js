@@ -1,4 +1,3 @@
-
 // Variables
 var searchTagForm = $('#tag_search_form');
 var searchTag = $('#search_tag'); // <--Search input folder

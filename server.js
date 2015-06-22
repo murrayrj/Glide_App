@@ -42,6 +42,12 @@ app.post('/callback', function(req, res) {
   console.log(req.body);
 
   var notification = req.body;
+<<<<<<< HEAD
+=======
+
+  io.sockets.emit('instagram', notification);
+});
+>>>>>>> b13e64f645b11d745f82c1a22b0afc655ace7741
 
   io.sockets.emit('instagram', notification);
 });
