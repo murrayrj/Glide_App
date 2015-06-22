@@ -3,10 +3,12 @@
 var searchTagForm = $('#tag_search_form');
 var searchTag = $('#search_tag'); // <--Search input folder
 var searchTagValue = ''; // <--- Value of the input form
-var loc = ''; // <--- Coordinates of the search, return i.e. {A: 48.856614, F: 2.3522219000000177} 
+var loc = ''; // <--- Coordinates of the search, return i.e. {A: 48.856614, F: 2.3522219000000177}
+var lat = 51.534488;
+var log = -0.189897;
 
 
-// Google maps 
+// Google maps style
 
 function initialize() {
   var styles = [
@@ -34,7 +36,7 @@ function initialize() {
   });
   var mapCanvas = document.getElementById('map-canvas');
   var mapOptions = {
-    center: new google.maps.LatLng(51.534488, -0.189897),
+    center: new google.maps.LatLng(lat, log),
     zoom: 15,
     mapTypeControlOptions: {
       mapTypeIds: [google.maps.MapTypeId.ROADMAP, 'map_style']
@@ -45,7 +47,12 @@ function initialize() {
   map.setMapTypeId('map_style');
 }
 
-google.maps.event.addDomListener(window, 'load', initialize);
+// Google Maps render a map on the page with the style describe prevously
+function renderMap() {
+  google.maps.event.addDomListener(window, 'load', initialize);
+}
+
+renderMap();
 
 
 //Geocoder
@@ -62,6 +69,10 @@ function searchFunction (event) {
             if (status == google.maps.GeocoderStatus.OK) { 
                 loc = results[0].geometry.location;
                 console.log(loc);
+                console.log(loc.A);
+                console.log(loc.F);
+                lat = loc.A;
+                log = loc.F;
             } 
             else {
                 alert("Not found: " + status); // <-- On styling change to a div to show or hide error
@@ -73,6 +84,7 @@ function searchFunction (event) {
 //Event listeners
 $(document).ready(function(){ 
   searchTagForm.on('submit', searchFunction); // Event listener for the form,
+  searchTagForm.on('submit', renderMap); // Event listener for the form,
 })
 
 
