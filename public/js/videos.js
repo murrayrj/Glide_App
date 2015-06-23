@@ -1,13 +1,9 @@
-var socket = io('http://64a68ea2.ngrok.io');
+var socket = io('http://b9e5f8d7.ngrok.io');
 var videos = [];
 var i;
 
-socket.on('connect', function () {
-  console.log('Connected!');
-});
-
-var request = socket.on('instagram', function () {
-  $.ajax({
+function getVideos() {
+  return $.ajax({
     url: 'https://api.instagram.com/v1/tags/videooftheday/media/recent?client_id=fee1f7a9b22c41149f86e7a44f199935',
     dataType: 'jsonp'
   }).done(function (response) {
@@ -23,4 +19,12 @@ var request = socket.on('instagram', function () {
       }
     }
   });
+}
+
+socket.on('connect', function () {
+  console.log('Connected!');
+});
+
+socket.on('instagram', function () {
+  getVideos();
 });
