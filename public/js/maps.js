@@ -66,12 +66,11 @@ function searchFunction (event) {
         function(results, status) { 
             if (status == google.maps.GeocoderStatus.OK) { 
                 loc = results[0].geometry.location;
+                lat = results[0].geometry.location.lat();
+                log = results[0].geometry.location.lng();
                 console.log(loc);
-                console.log(loc.A);
-                console.log(loc.F);
-                lat = loc.A;
-                log = loc.F;
-                // google.maps.event.trigger(map, 'resize');
+                console.log(lat);
+                console.log(log);
             } 
             else {
                 alert("Not found: " + status); // <-- On styling change to a div to show or hide error
