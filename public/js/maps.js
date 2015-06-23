@@ -5,12 +5,11 @@ var searchTagValue = ''; // <--- Value of the input form
 var loc = ''; // <--- Coordinates of the search, return i.e. {A: 48.856614, F: 2.3522219000000177}
 var lat = 51.534488;
 var log = -0.189897;
-// var map = '';
+var map = '';
 var geocoder = new google.maps.Geocoder();
 
 // Google maps style
 
->>>>>>> PMnewmap:public/js/maps.js
 function initialize() {
   var styles = [
   {
@@ -43,7 +42,7 @@ function initialize() {
       mapTypeIds: [google.maps.MapTypeId.ROADMAP, 'map_style']
     }
   };
-  var map = new google.maps.Map(mapCanvas, mapOptions);
+  map = new google.maps.Map(mapCanvas, mapOptions);
   map.mapTypes.set('map_style', styledMap);
   map.setMapTypeId('map_style');
 }
@@ -55,6 +54,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
 //Refresing the map canvas
 //This function it's not working
 function refreshMap() {
+  debugger;
   console.log('renderMap');
   google.maps.event.trigger(map, 'resize');
 }
@@ -74,12 +74,15 @@ function searchFunction (event) {
                 console.log(loc.F);
                 lat = loc.A;
                 log = loc.F;
+                // google.maps.event.trigger(map, 'resize');
             } 
             else {
                 alert("Not found: " + status); // <-- On styling change to a div to show or hide error
             } 
+            map.setCenter(loc);
         }
     );
+
 };
 
 
@@ -87,5 +90,5 @@ function searchFunction (event) {
 //Event listeners
 $(document).ready(function(){ 
   searchTagForm.on('submit', searchFunction); // Event listener for the form,
-  searchTagForm.on('submit', refreshMap); // Event listener for the form,
+  // searchTagForm.on('submit', refreshMap); // Event listener for the form,
 })
