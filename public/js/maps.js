@@ -2,11 +2,12 @@
 var searchTagForm = $('#tag_search_form');
 var searchTag = $('#search_tag'); // <--Search input folder
 var searchTagValue = ''; // <--- Value of the input form
-var loc = {A: 51.534488, F: -0.189897}; // <--- Coordinates of the search, return i.e. {A: 48.856614, F: 2.3522219000000177}
+var myLatlng = {A: 51.534488, F: -0.189897}; // <--- Coordinates of the search, return i.e. {A: 48.856614, F: 2.3522219000000177}
 var lat = 51.534488;
-var log = -0.189897;
+var lng = -0.189897;
 var map = '';
 var geocoder = new google.maps.Geocoder();
+var marker ='';
 
 // Google maps style
 
@@ -36,14 +37,14 @@ function initialize() {
   });
   var mapCanvas = document.getElementById('map-canvas');
   var mapOptions = {
-    center: new google.maps.LatLng(lat, log),
+    center: new google.maps.LatLng(lat, lng),
     zoom: 12,
     mapTypeControlOptions: {
       mapTypeIds: [google.maps.MapTypeId.ROADMAP, 'map_style']
     }
   };
-  myLatlng = new google.maps.LatLng(lat, log);
-  var marker = new google.maps.Marker({
+  myLatlng = new google.maps.LatLng(lat, lng);
+  marker = new google.maps.Marker({
     position: myLatlng,
     title:"Hello World!"
   });
@@ -65,17 +66,22 @@ function searchFunction (event) {
         {'address': searchTagValue},
         function(results, status) { 
             if (status == google.maps.GeocoderStatus.OK) { 
-                loc = results[0].geometry.location;
+                myLatlng = results[0].geometry.location;
                 lat = results[0].geometry.location.lat();
-                log = results[0].geometry.location.lng();
-                console.log(loc);
+                lng = results[0].geometry.location.lng();
+                console.log(myLatlng);
                 console.log(lat);
-                console.log(log);
+                console.log(lng);
             } 
             else {
                 alert("Not found: " + status); // <-- On styling change to a div to show or hide error
             }
-            map.setCenter(loc);
+            map.setCenter(myLatlng);
+            marker = new google.maps.Marker({
+              position: myLatlng,
+              title:"Hello World!"
+            });
+            marker.setMap(map);
         }
     );
 };
