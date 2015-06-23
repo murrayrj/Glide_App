@@ -9,6 +9,10 @@ var map;
 var geocoder = new google.maps.Geocoder();
 var marker;
 
+var socket = io('http://d53c5486.ngrok.io');
+var videos = [];
+var i;
+
 // Google maps style
 
 function initialize() {
@@ -100,14 +104,58 @@ function searchFunction(event) {
   return dfr.promise();
 }
 
+function getVideos(location) {
+  return $.ajax({
+    url: 'https://api.instagram.com/v1/tags/' + location + '/media/recent?client_id=fee1f7a9b22c41149f86e7a44f199935',
+    dataType: 'jsonp'
+  }).done(function (response) {
+    console.log(response);
+    for (i = 0; i < 20; i++) {
+      if (response.data[i].type === "video" && videos.indexOf(response.data[i].id) === -1) {
+        if (videos.length >= 5) {
+          return;
+        } else {
+          $('#video-container').prepend('<li><video src="' + response.data[i].videos.low_resolution.url + '" controls></video></li>');
+          videos.push(response.data[i].id);
+        }
+      }
+    }
+  });
+}
+
+
+socket.on('connect', function () {
+  console.log('Connected!');
+});
+
+function subsribeToTag(searchTerm) {
+  $.ajax({
+    url :'/tags/subscribe', 
+    data: { 
+      data: searchTerm
+    },
+    type: 'POST'
+  })
+  .done(function(response) {
+    console.log(response);
+  })
+}
+
+function getTag(event) {
+  var promise = event.result;
+  promise.then(function (coordinates) {
+    subsribeToTag(coordinates.searchTerm);
+    console.log(coordinates);
+    console.log(coordinates.searchTerm);
+    socket.on('instagram', function () {
+      getVideos(coordinates.searchTerm);
+    });
+  });
+}
 
 //Event listeners
 $(document).ready(function () {
   searchTagForm.on('submit', searchFunction);
-  searchTagForm.on('submit', function (event) {
-    var promise = event.result;
-    promise.then(function (coordinates) {
-      console.log(coordinates);
-    });
-  });
+  searchTagForm.on('submit', getTag);
 });
+

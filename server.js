@@ -10,6 +10,7 @@ var i;
 
 app.use(morgan('dev'));
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(__dirname + '/public'));
 
 app.set('views', './views');
@@ -19,26 +20,36 @@ instagram.set('client_id', process.env.INSTAGRAM_CLIENT_ID);
 instagram.set('client_secret', process.env.INSTAGRAM_CLIENT_SECRET);
 
 instagram.set('callback_url', 'http://13eacc9b.ngrok.io/callback');
+
 instagram.set('maxSockets', 50);
 
-var tags = ['videooftheday'];
+// var tags = ['london'];
 
-for (i = 0; i < tags.length; i++) {
-  instagram.subscriptions.subscribe({
-    object: 'tag',
-    object_id: tags[i]
-  });
-}
+// for (i = 0; i < tags.length; i++) {
+  // instagram.subscriptions.subscribe({
+  //   object: 'tag',
+  //   object_id: tag
+  // });
+// }
 
-app.get('/', function(req, res) {
+app.get('/', function (req, res) {
   res.render('index');
 });
 
-app.get('/callback', function(req, res) {
-  instagram.subscriptions.handshake(req, res); 
+app.get('/callback', function (req, res) {
+  instagram.subscriptions.handshake(req, res);
 });
 
-app.post('/callback', function(req, res) {
+app.post('/tags/subscribe', function(req, res){
+  var tag = req.body.data;
+
+  instagram.subscriptions.subscribe({
+    object: 'tag',
+    object_id: tag
+  });
+})
+
+app.post('/callback', function (req, res) {
   console.log(req.body);
 
   var notification = req.body;
@@ -46,6 +57,6 @@ app.post('/callback', function(req, res) {
   io.sockets.emit('instagram', notification);
 });
 
-server.listen(port, function() {
+server.listen(port, function () {
   console.log('Pedro, Laura and Richard are cool!');
 });
