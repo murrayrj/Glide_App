@@ -9,29 +9,30 @@ var map = '';
 var geocoder = new google.maps.Geocoder();
 
 // Google maps style
-
 function initialize() {
   var styles = [
-  {
-    featureType: "all",
-    stylers: [
-    { saturation: -80 
-    }]},
-    {
-      featureType: "road.arterial",
-      elementType: "geometry",
-      stylers: [
-      { hue: "#00ffee" },
-      { saturation: 50 }
-      ]},
+      {
+        featureType: "all",
+        stylers: [
+          {saturation: -80}
+        ]
+      },
+      {
+        featureType: "road.arterial",
+        elementType: "geometry",
+        stylers: [
+          { hue: "#00ffee" },
+          { saturation: 50 }]
+      },
       {
         featureType: "poi.business",
         elementType: "labels",
         stylers: [{
-         visibility: "off" 
-        }]}
-];
-  var styledMap = new google.maps.StyledMapType(styles,{
+          visibility: "off"
+        }]
+      }
+    ];
+  var styledMap = new google.maps.StyledMapType(styles, {
     name: "Styled Map"
   });
   var mapCanvas = document.getElementById('map-canvas');
@@ -46,7 +47,6 @@ function initialize() {
   map.mapTypes.set('map_style', styledMap);
   map.setMapTypeId('map_style');
 }
-
 // Google Maps render a map on the page with the style describe previously
 
 google.maps.event.addDomListener(window, 'load', initialize);
@@ -54,41 +54,41 @@ google.maps.event.addDomListener(window, 'load', initialize);
 //Refresing the map canvas
 //This function it's not working
 function refreshMap() {
-  debugger;
+
   console.log('renderMap');
   google.maps.event.trigger(map, 'resize');
 }
 
 
 // This function return the input value as coordinates and store it on a variables called loc
-function searchFunction (event) { 
+function searchFunction(event) {
   event.preventDefault();
   searchTagValue = $('#search_tag').val();
-    geocoder.geocode(
-        {'address': searchTagValue},
-        function(results, status) { 
-            if (status == google.maps.GeocoderStatus.OK) { 
-                loc = results[0].geometry.location;
-                console.log(loc);
-                console.log(loc.A);
-                console.log(loc.F);
-                lat = loc.A;
-                log = loc.F;
-                // google.maps.event.trigger(map, 'resize');
-            } 
-            else {
-                alert("Not found: " + status); // <-- On styling change to a div to show or hide error
-            } 
-            map.setCenter(loc);
-        }
-    );
+  geocoder.geocode(
+    {'address': searchTagValue},
+    function (results, status) {
+      if (status === google.maps.GeocoderStatus.OK) {
+        loc = results[0].geometry.location;
+        console.log(loc);
+        console.log(loc.A);
+        console.log(loc.F);
+        lat = loc.A;
+        log = loc.F;
+        // google.maps.event.trigger(map, 'resize');
+      } else {
+        alert("Not found: " + status); // <-- On styling change to a div to show or hide error
+      }
+      map.setCenter(loc);
+    }
+  );
+}
 
-};
+
 
 
 
 //Event listeners
-$(document).ready(function(){ 
+$(document).ready(function () {
   searchTagForm.on('submit', searchFunction); // Event listener for the form,
   // searchTagForm.on('submit', refreshMap); // Event listener for the form,
-})
+});
