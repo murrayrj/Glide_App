@@ -49,7 +49,8 @@ function initialize() {
   myLatlng = new google.maps.LatLng(lat, lng);
   marker = new google.maps.Marker({
     position: myLatlng,
-    title: "Hello World!"
+    title: "Hello World!",
+    animation: google.maps.Animation.DROP
   });
   map = new google.maps.Map(mapCanvas, mapOptions);
   map.mapTypes.set('map_style', styledMap);
@@ -90,7 +91,8 @@ function searchFunction(event) {
       map.setCenter(myLatlng);
       marker = new google.maps.Marker({
         position: myLatlng,
-        title: "Hello World!"
+        title: "Hello World!",
+        animation: google.maps.Animation.DROP
       });
       marker.setMap(map);
     }
@@ -108,14 +110,4 @@ $(document).ready(function () {
       console.log(coordinates);
     });
   });
-});
-
-
-
-
-
-//Event listeners
-$(document).ready(function () {
-  searchTagForm.on('submit', searchFunction); // Event listener for the form,
-  // searchTagForm.on('submit', refreshMap); // Event listener for the form,
 });

@@ -18,7 +18,7 @@ app.set('view engine', 'ejs');
 instagram.set('client_id', process.env.INSTAGRAM_CLIENT_ID);
 instagram.set('client_secret', process.env.INSTAGRAM_CLIENT_SECRET);
 
-instagram.set('callback_url', 'http://64a68ea2.ngrok.io/callback');
+instagram.set('callback_url', 'http://13eacc9b.ngrok.io/callback');
 instagram.set('maxSockets', 50);
 
 var tags = ['videooftheday'];
