@@ -1,4 +1,4 @@
-  var express = require('express');
+var express = require('express');
 var app = express();
 var server = require('http').createServer(app);
 var io = require('socket.io')(server);
@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 var instagram = require('instagram-node-lib');
 var port = process.env.PORT || 3000;
 var i;
+var tag = '';
 
 app.use(morgan('dev'));
 app.use(bodyParser.json());
@@ -22,15 +23,6 @@ instagram.set('client_secret', process.env.INSTAGRAM_CLIENT_SECRET);
 instagram.set('callback_url', 'http://d53c5486.ngrok.io/callback');
 instagram.set('maxSockets', 50);
 
-// var tags = ['london'];
-
-// for (i = 0; i < tags.length; i++) {
-  // instagram.subscriptions.subscribe({
-  //   object: 'tag',
-  //   object_id: tag
-  // });
-// }
-
 app.get('/', function (req, res) {
   res.render('index');
 });
@@ -39,17 +31,17 @@ app.get('/callback', function (req, res) {
   instagram.subscriptions.handshake(req, res);
 });
 
-app.post('/tags/subscribe', function(req, res){
-  var tag = req.body.data;
-
+app.post('/tags/subscribe', function (req, res) {
+  tag = req.body.data;
   instagram.subscriptions.subscribe({
     object: 'tag',
     object_id: tag
   });
-})
+});
 
 app.post('/callback', function (req, res) {
   console.log(req.body);
+  console.log(req.body[0].object_id);
 
   var notification = req.body;
 
