@@ -297,10 +297,13 @@ function initialize() {
       mapTypeIds: [google.maps.MapTypeId.ROADMAP, 'map_style']
     }
   };
+  map = new google.maps.Map(mapCanvas, mapOptions);
+
 
   myLatlng = new google.maps.LatLng(lat, lng);
   // var image = 'http://postimg.org/image/hml638ypz/';
-  var image = 'glide-pin.png';
+  var image = '../js/icon_development_small.png';
+  // console.log(image);
   marker = new google.maps.Marker({
     position: myLatlng,
     title: "Hello World!",
@@ -309,7 +312,7 @@ function initialize() {
     animation: google.maps.Animation.DROP
   });
 
-  map = new google.maps.Map(mapCanvas, mapOptions);
+
   map.mapTypes.set('map_style', styledMap);
   map.setMapTypeId('map_style');
 }
@@ -355,7 +358,7 @@ function getVideos(info) {
   var coordLng = info.lng
   var location = info.searchTerm
   return $.ajax({
-    url: 'https://api.instagram.com/v1/tags/' + location + '/media/recent?client_id=fee1f7a9b22c41149f86e7a44f199935',
+    url: 'https://api.instagram.com/v1/tags/' + location + '/media/recent?client_id=153b4749d14347c7ae070c0fe71eaed7',
     dataType: 'jsonp'
   }).done(function (response) {
     console.log(response);
@@ -396,6 +399,8 @@ function getVideos(info) {
 
           marker = new google.maps.Marker({
           position: myLatlng,
+          map: map,
+          icon: image,
           animation: google.maps.Animation.DROP
           });
           var infowindow = new google.maps.InfoWindow({
