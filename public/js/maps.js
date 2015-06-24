@@ -113,13 +113,13 @@ function getVideos(location) {
           console.log(response.data[i].location.longitude);
         }
         if (response.data[i].tags.indexOf(location) > -1) {
-          $('#video-container').prepend('<video class="pin_info_window" src="' + response.data[i].videos.low_resolution.url + '" controls></video>');
+          $('#video-container').prepend('<video src="' + response.data[i].videos.low_resolution.url + '" controls></video>');
           videos.push([response.data[i].id]);
           marker = new google.maps.Marker({
             position: myLatlng,
             animation: google.maps.Animation.DROP
           });
-          contentString = '<video width="320" height="240" src="' + response.data[i].videos.low_resolution.url + '" controls></video>'
+          contentString = '<div class="pin_info_window"><video width="320" height="240" src="' + response.data[i].videos.low_resolution.url + '" controls></video></div>'
           var infowindow = new google.maps.InfoWindow({
             content: contentString
           });
