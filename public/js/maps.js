@@ -8,7 +8,7 @@ var lng = -0.189897;
 var map;
 var geocoder = new google.maps.Geocoder();
 var marker;
-var socket = io('http://a098e9f0.ngrok.io');  
+var socket = io('http://a098e9f0.ngrok.io');
 var videos = [];
 var i;
 
@@ -65,8 +65,15 @@ function initialize() {
 
 google.maps.event.addDomListener(window, 'load', initialize);
 
+function unsubscribeAll() {
+  $.get('/unsubscribeAll', function (data) {
+    console.log(data);
+  });
+}
+
 // This function return the input value as coordinates and store it on a variables called loc
 function searchFunction(event) {
+  unsubscribeAll();
   var dfr = $.Deferred();
   event.preventDefault();
   searchTagValue = $('#search_tag').val();
@@ -77,15 +84,15 @@ function searchFunction(event) {
         myLatlng = results[0].geometry.location;
         lat = results[0].geometry.location.lat();
         lng = results[0].geometry.location.lng();
-        var coords = {
+        var coordinates = {
             searchTerm: searchTagValue,
             lat: lat,
             lng: lng
           };
-        dfr.resolve(coords);
-        console.log(myLatlng);
-        console.log(lat);
-        console.log(lng);
+        dfr.resolve(coordinates);
+        // console.log(myLatlng);
+        // console.log(lat);
+        // console.log(lng);
       } else {
         alert("Not found: " + status);
 
@@ -108,38 +115,33 @@ function getVideos(location) {
     url: 'https://api.instagram.com/v1/tags/' + location + '/media/recent?client_id=fee1f7a9b22c41149f86e7a44f199935',
     dataType: 'jsonp'
   }).done(function (response) {
-    console.log(response);
     console.log(location);
     for (i = 0; i < 20; i++) {
       if (response.data[i].type === "video" && videos.indexOf(response.data[i].id) === -1) {
         if (videos.length >= 5) {
           return;
-        } else {
-          console.log('response.data');
-          console.log(response.data[i]);
-          console.log(response.data[i].videos.low_resolution.url);
-          console.log(response.data[i].location);
-          console.log(response.data[i].location.latitude);
-          lat = response.data[i].location.latitude;
-          lng = response.data[i].location.longitude;
-          myLatlng = new google.maps.LatLng(lat, lng);
-          console.log(response.data[i].location.longitude);
         }
-        if (response.data[i].tags.indexOf(location) > -1) {
-          $('#video-container').prepend('<li><video src="' + response.data[i].videos.low_resolution.url + '" controls></video></li>');
-          videos.push([response.data[i].id]);
-          marker = new google.maps.Marker({
-            position: myLatlng,
-            title: "Hello World!",
-            animation: google.maps.Animation.DROP
-          });
-          marker.setMap(map);
-        }
+        console.log('response.data');
+        // console.log(response.data[i]);
+        // console.log(response.data[i].videos.low_resolution.url);
+        // console.log(response.data[i].location);
+        // console.log(response.data[i].location.latitude);
+        lat = response.data[i].location.latitude;
+        lng = response.data[i].location.longitude;
+        myLatlng = new google.maps.LatLng(lat, lng);
+        console.log(response.data[i].location.longitude);
+        $('#video-container').prepend('<li><video src="' + response.data[i].videos.low_resolution.url + '" controls></video></li>');
+        videos.push([response.data[i].id]);
+        marker = new google.maps.Marker({
+          position: myLatlng,
+          title: "Hello World!",
+          animation: google.maps.Animation.DROP
+        });
+        marker.setMap(map);
       }
     }
   });
 }
-
 
 socket.on('connect', function () {
   console.log('Connected!');
@@ -162,8 +164,7 @@ function getTag(event) {
   var promise = event.result;
   promise.then(function (coordinates) {
     subsribeToTag(coordinates.searchTerm);
-    console.log(coordinates);
-    console.log(coordinates.searchTerm);
+
     socket.on('instagram', function () {
       getVideos(coordinates.searchTerm);
     });
