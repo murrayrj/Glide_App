@@ -9,6 +9,7 @@ var port = process.env.PORT || 3000;
 var i;
 var tag = '';
 
+//middleware
 app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
