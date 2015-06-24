@@ -85,12 +85,6 @@ function searchFunction(event) {
         dfr.reject('derrp');
       }
       map.setCenter(myLatlng);
-      // marker = new google.maps.Marker({
-      //   position: myLatlng,
-      //   title: "Hello World!",
-      //   animation: google.maps.Animation.DROP
-      // });
-      // marker.setMap(map);
     }
   );
   return dfr.promise();
@@ -119,14 +113,13 @@ function getVideos(location) {
           console.log(response.data[i].location.longitude);
         }
         if (response.data[i].tags.indexOf(location) > -1) {
-          $('#video-container').prepend('<li><video src="' + response.data[i].videos.low_resolution.url + '" controls></video></li>');
+          $('#video-container').prepend('<video class="pin_info_window" src="' + response.data[i].videos.low_resolution.url + '" controls></video>');
           videos.push([response.data[i].id]);
           marker = new google.maps.Marker({
             position: myLatlng,
-            title: "Hello World!",
             animation: google.maps.Animation.DROP
           });
-          contentString = 'coolbeans'
+          contentString = '<video width="320" height="240" src="' + response.data[i].videos.low_resolution.url + '" controls></video>'
           var infowindow = new google.maps.InfoWindow({
             content: contentString
           });
