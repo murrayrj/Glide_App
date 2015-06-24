@@ -99,35 +99,28 @@ function getVideos(location) {
     console.log(location);
     for (i = 0; i < 20; i++) {
       if (response.data[i].type === "video" && videos.indexOf(response.data[i].id) === -1) {
+        console.log(response.data[i]);
+        lat = response.data[i].location.latitude;
+        lng = response.data[i].location.longitude;
+        myLatlng = new google.maps.LatLng(lat, lng);
+        console.log(response.data[i].location.longitude);
+        $('#video-container').prepend('<video src="' + response.data[i].videos.low_resolution.url + '" controls></video>');
+        videos.push(response.data[i].id);
+        console.log(videos);
+        marker = new google.maps.Marker({
+          position: myLatlng,
+          animation: google.maps.Animation.DROP
+        });
+        var infowindow = new google.maps.InfoWindow({
+         content: '<div class="pin_info_window"><video width="320" height="240" src="' + response.data[i].videos.low_resolution.url + '" controls></video></div>'
+        });
+        google.maps.event.addListener(marker, 'click', function() {
+          infowindow.open(map,marker);
+        });
+        marker.setMap(map);
         if (videos.length >= 5) {
           return;
-        } else {
-          console.log('response.data');
-          console.log(response.data[i]);
-          console.log(response.data[i].videos.low_resolution.url);
-          console.log(response.data[i].location);
-          console.log(response.data[i].location.latitude);
-          lat = response.data[i].location.latitude;
-          lng = response.data[i].location.longitude;
-          myLatlng = new google.maps.LatLng(lat, lng);
-          console.log(response.data[i].location.longitude);
-        }
-        if (response.data[i].tags.indexOf(location) > -1) {
-          $('#video-container').prepend('<video src="' + response.data[i].videos.low_resolution.url + '" controls></video>');
-          videos.push([response.data[i].id]);
-          marker = new google.maps.Marker({
-            position: myLatlng,
-            animation: google.maps.Animation.DROP
-          });
-          contentString = '<div class="pin_info_window"><video width="320" height="240" src="' + response.data[i].videos.low_resolution.url + '" controls></video></div>'
-          var infowindow = new google.maps.InfoWindow({
-            content: contentString
-          });
-          google.maps.event.addListener(marker, 'click', function() {
-            infowindow.open(map,marker);
-          });
-          marker.setMap(map);
-        }
+        } 
       }
     }
   });
