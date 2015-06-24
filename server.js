@@ -7,6 +7,9 @@ var bodyParser = require('body-parser');
 var instagram = require('instagram-node-lib');
 var port = process.env.PORT || 3000;
 var i;
+var tag;
+var ids = [];
+var subId;
 
 app.use(morgan('dev'));
 app.use(bodyParser.json());
@@ -23,15 +26,6 @@ instagram.set('callback_url', 'http://d913c569.ngrok.io/callback');
 
 instagram.set('maxSockets', 50);
 
-// var tags = ['london'];
-
-// for (i = 0; i < tags.length; i++) {
-  // instagram.subscriptions.subscribe({
-  //   object: 'tag',
-  //   object_id: tag
-  // });
-// }
-
 app.get('/', function (req, res) {
   res.render('index');
 });
@@ -40,23 +34,31 @@ app.get('/callback', function (req, res) {
   instagram.subscriptions.handshake(req, res);
 });
 
-app.post('/tags/subscribe', function(req, res){
-  var tag = req.body.data;
+app.post('/tags/subscribe', function (req, res) {
+  tag = req.body.data;
 
   instagram.subscriptions.subscribe({
     object: 'tag',
     object_id: tag
   });
-})
+});
 
 app.post('/callback', function (req, res) {
   console.log(req.body);
-
   var notification = req.body;
 
   io.sockets.emit('instagram', notification);
+
+  if (ids.indexOf(req.body[0].subscription_id) === -1) {
+    ids.push(req.body[0].subscription_id);
+    if(ids.length > 1) {
+      instagram.subscriptions.unsubscribe({ id: ids[0].toString() });
+      ids.splice(0, 1);
+    }
+  }
 });
 
 server.listen(port, function () {
   console.log('Pedro, Laura and Richard are cool!');
 });
+
