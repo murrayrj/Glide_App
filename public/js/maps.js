@@ -8,7 +8,7 @@ var lng = -0.189897;
 var map;
 var geocoder = new google.maps.Geocoder();
 var marker;
-var socket = io('http://d913c569.ngrok.io');  
+var socket = io('http://a098e9f0.ngrok.io');  
 var videos = [];
 var i;
 
