@@ -49,16 +49,9 @@ function initialize() {
       mapTypeIds: [google.maps.MapTypeId.ROADMAP, 'map_style']
     }
   };
-  myLatlng = new google.maps.LatLng(lat, lng);
-  marker = new google.maps.Marker({
-    position: myLatlng,
-    title: "Hello World!",
-    animation: google.maps.Animation.DROP
-  });
   map = new google.maps.Map(mapCanvas, mapOptions);
   map.mapTypes.set('map_style', styledMap);
   map.setMapTypeId('map_style');
-  marker.setMap(map);
 }
 
 // Google Maps render a map on the page with the style describe previously
@@ -92,12 +85,12 @@ function searchFunction(event) {
         dfr.reject('derrp');
       }
       map.setCenter(myLatlng);
-      marker = new google.maps.Marker({
-        position: myLatlng,
-        title: "Hello World!",
-        animation: google.maps.Animation.DROP
-      });
-      marker.setMap(map);
+      // marker = new google.maps.Marker({
+      //   position: myLatlng,
+      //   title: "Hello World!",
+      //   animation: google.maps.Animation.DROP
+      // });
+      // marker.setMap(map);
     }
   );
   return dfr.promise();
@@ -132,6 +125,13 @@ function getVideos(location) {
             position: myLatlng,
             title: "Hello World!",
             animation: google.maps.Animation.DROP
+          });
+          contentString = 'coolbeans'
+          var infowindow = new google.maps.InfoWindow({
+            content: contentString
+          });
+          google.maps.event.addListener(marker, 'click', function() {
+            infowindow.open(map,marker);
           });
           marker.setMap(map);
         }
