@@ -9,7 +9,7 @@ var map;
 var geocoder = new google.maps.Geocoder();
 var marker;
 
-var socket = io('http://d53c5486.ngrok.io');
+var socket = io('http://d913c569.ngrok.io'); 
 var videos = [];
 var i;
 
@@ -115,8 +115,23 @@ function getVideos(location) {
         if (videos.length >= 5) {
           return;
         } else {
+          console.log('response.data');
+          console.log(response.data[i]);
+          console.log(response.data[i].videos.low_resolution.url);
+          console.log(response.data[i].location);
+          console.log(response.data[i].location.latitude);
+          lat = response.data[i].location.latitude;
+          lng = response.data[i].location.longitude;
+          myLatlng = new google.maps.LatLng(lat, lng);
+          console.log(response.data[i].location.longitude);
           $('#video-container').prepend('<li><video src="' + response.data[i].videos.low_resolution.url + '" controls></video></li>');
-          videos.push(response.data[i].id);
+          videos.push([response.data[i].id]);
+          marker = new google.maps.Marker({
+            position: myLatlng,
+            title: "Hello World!",
+            animation: google.maps.Animation.DROP
+          });
+          marker.setMap(map);
         }
       }
     }
