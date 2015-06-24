@@ -358,7 +358,7 @@ function getVideos(info) {
   var coordLng = info.lng
   var location = info.searchTerm
   return $.ajax({
-    url: 'https://api.instagram.com/v1/tags/' + location + '/media/recent?client_id=153b4749d14347c7ae070c0fe71eaed7',
+    url: 'https://api.instagram.com/v1/tags/' + location + '/media/recent?client_id=fee1f7a9b22c41149f86e7a44f199935',
     dataType: 'jsonp'
   }).done(function (response) {
     console.log(response);
