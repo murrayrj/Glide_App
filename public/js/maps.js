@@ -66,7 +66,7 @@ function searchFunction (event) {
         {'address': searchTagValue},
         function(results, status) { 
             if (status == google.maps.GeocoderStatus.OK) { 
-                myLatlng = results[0].geometry.location;
+                // myLatlng = results[0].geometry.location;
                 lat = results[0].geometry.location.lat();
                 lng = results[0].geometry.location.lng();
                 console.log(myLatlng);
@@ -77,6 +77,7 @@ function searchFunction (event) {
                 alert("Not found: " + status); // <-- On styling change to a div to show or hide error
             }
             map.setCenter(myLatlng);
+            myLatlng = new google.maps.LatLng(lat, lng);
             marker = new google.maps.Marker({
               position: myLatlng,
               title:"Hello World!"
