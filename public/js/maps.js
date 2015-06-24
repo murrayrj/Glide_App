@@ -9,7 +9,7 @@ var map;
 var geocoder = new google.maps.Geocoder();
 var marker;
 
-var socket = io('http://d53c5486.ngrok.io');
+var socket = io('http://a098e9f0.ngrok.io');
 var videos = [];
 var i;
 
@@ -110,11 +110,13 @@ function getVideos(location) {
     dataType: 'jsonp'
   }).done(function (response) {
     console.log(response);
+    console.log(location);
     for (i = 0; i < 20; i++) {
       if (response.data[i].type === "video" && videos.indexOf(response.data[i].id) === -1) {
         if (videos.length >= 5) {
           return;
-        } else {
+        }
+        if (response.data[i].tags.indexOf(location) > -1) {
           $('#video-container').prepend('<li><video src="' + response.data[i].videos.low_resolution.url + '" controls></video></li>');
           videos.push(response.data[i].id);
         }
@@ -130,15 +132,15 @@ socket.on('connect', function () {
 
 function subsribeToTag(searchTerm) {
   $.ajax({
-    url :'/tags/subscribe', 
-    data: { 
+    url : '/tags/subscribe',
+    data: {
       data: searchTerm
     },
     type: 'POST'
   })
-  .done(function(response) {
-    console.log(response);
-  })
+    .done(function (response) {
+      console.log(response);
+    });
 }
 
 function getTag(event) {
@@ -158,4 +160,3 @@ $(document).ready(function () {
   searchTagForm.on('submit', searchFunction);
   searchTagForm.on('submit', getTag);
 });
-

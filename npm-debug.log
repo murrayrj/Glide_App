@@ -1,0 +1,180 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'node',
+1 verbose cli   '/usr/local/bin/npm',
+1 verbose cli   'install',
+1 verbose cli   'sh',
+1 verbose cli   'src/generate_curl_options_list.sh' ]
+2 info using npm@2.11.3
+3 info using node@v0.12.2
+4 verbose install initial load of /Users/Richard/Desktop/wdi_13/projects/project_3/package.json
+5 warn package.json Glide@1.0.0 No description
+6 warn package.json Glide@1.0.0 No repository field.
+7 warn package.json Glide@1.0.0 No README data
+8 verbose installManyTop reading scoped package data from /Users/Richard/Desktop/wdi_13/projects/project_3/node_modules/body-parser/package.json
+9 verbose installManyTop reading scoped package data from /Users/Richard/Desktop/wdi_13/projects/project_3/node_modules/ejs/package.json
+10 verbose installManyTop reading scoped package data from /Users/Richard/Desktop/wdi_13/projects/project_3/node_modules/express/package.json
+11 verbose installManyTop reading scoped package data from /Users/Richard/Desktop/wdi_13/projects/project_3/node_modules/http/package.json
+12 verbose installManyTop reading scoped package data from /Users/Richard/Desktop/wdi_13/projects/project_3/node_modules/https/package.json
+13 verbose installManyTop reading scoped package data from /Users/Richard/Desktop/wdi_13/projects/project_3/node_modules/instagram-node-lib/package.json
+14 verbose installManyTop reading scoped package data from /Users/Richard/Desktop/wdi_13/projects/project_3/node_modules/mongoose/package.json
+15 verbose installManyTop reading scoped package data from /Users/Richard/Desktop/wdi_13/projects/project_3/node_modules/morgan/package.json
+16 verbose installManyTop reading scoped package data from /Users/Richard/Desktop/wdi_13/projects/project_3/node_modules/node-sass/package.json
+17 verbose installManyTop reading scoped package data from /Users/Richard/Desktop/wdi_13/projects/project_3/node_modules/path/package.json
+18 verbose installManyTop reading scoped package data from /Users/Richard/Desktop/wdi_13/projects/project_3/node_modules/repl/package.json
+19 verbose installManyTop reading scoped package data from /Users/Richard/Desktop/wdi_13/projects/project_3/node_modules/socket.io/package.json
+20 info package.json http@0.0.0 http is also the name of a node core module.
+21 info package.json http@0.0.0 No description
+22 info package.json http@0.0.0 No repository field.
+23 info package.json https@1.0.0 https is also the name of a node core module.
+24 info package.json https@1.0.0 No repository field.
+25 info package.json https@1.0.0 No README data
+26 info package.json instagram-node-lib@0.1.1 No license field.
+27 info package.json socket.io@1.3.5 No license field.
+28 info package.json repl@0.1.3 repl is also the name of a node core module.
+29 info package.json repl@0.1.3 No license field.
+30 info package.json path@0.11.14 path is also the name of a node core module.
+31 verbose readDependencies loading dependencies from /Users/Richard/Desktop/wdi_13/projects/project_3/package.json
+32 silly cache add args [ 'sh', null ]
+33 verbose cache add spec sh
+34 silly cache add args [ 'src/generate_curl_options_list.sh', null ]
+35 verbose cache add spec src/generate_curl_options_list.sh
+36 silly cache add parsed spec { raw: 'sh',
+36 silly cache add   scope: null,
+36 silly cache add   name: 'sh',
+36 silly cache add   rawSpec: '',
+36 silly cache add   spec: '*',
+36 silly cache add   type: 'range' }
+37 silly addNamed sh@*
+38 verbose addNamed "*" is a valid semver range for sh
+39 silly addNameRange { name: 'sh', range: '*', hasData: false }
+40 silly mapToRegistry name sh
+41 silly mapToRegistry using default registry
+42 silly mapToRegistry registry https://registry.npmjs.org/
+43 silly mapToRegistry uri https://registry.npmjs.org/sh
+44 verbose addNameRange registry:https://registry.npmjs.org/sh not in flight; fetching
+45 silly cache add parsed spec { raw: 'src/generate_curl_options_list.sh',
+45 silly cache add   scope: null,
+45 silly cache add   name: null,
+45 silly cache add   rawSpec: 'src/generate_curl_options_list.sh',
+45 silly cache add   spec: 'github:src/generate_curl_options_list.sh',
+45 silly cache add   type: 'hosted',
+45 silly cache add   hosted:
+45 silly cache add    { type: 'github',
+45 silly cache add      ssh: 'git@github.com:src/generate_curl_options_list.sh.git',
+45 silly cache add      sshUrl: 'git+ssh://git@github.com/src/generate_curl_options_list.sh.git',
+45 silly cache add      httpsUrl: 'git+https://github.com/src/generate_curl_options_list.sh.git',
+45 silly cache add      gitUrl: 'git://github.com/src/generate_curl_options_list.sh.git',
+45 silly cache add      shortcut: 'github:src/generate_curl_options_list.sh',
+45 silly cache add      directUrl: 'https://raw.githubusercontent.com/src/generate_curl_options_list.sh/master/package.json' } }
+46 verbose addRemoteGit caching src/generate_curl_options_list.sh
+47 verbose addRemoteGit src/generate_curl_options_list.sh is a repository hosted by github
+48 silly tryGitProto attempting to clone git://github.com/src/generate_curl_options_list.sh.git
+49 silly tryClone cloning src/generate_curl_options_list.sh via git://github.com/src/generate_curl_options_list.sh.git
+50 verbose tryClone git-github-com-src-generate-curl-options-list-sh-git-1d88dc71 not in flight; caching
+51 verbose request uri https://registry.npmjs.org/sh
+52 verbose request no auth needed
+53 info attempt registry request try #1 at 6:43:59 PM
+54 verbose request id 306f0bb9e73b1ee0
+55 http request GET https://registry.npmjs.org/sh
+56 info git [ 'clone',
+56 info git   '--template=/Users/Richard/.npm/_git-remotes/_templates',
+56 info git   '--mirror',
+56 info git   'git://github.com/src/generate_curl_options_list.sh.git',
+56 info git   '/Users/Richard/.npm/_git-remotes/git-github-com-src-generate-curl-options-list-sh-git-1d88dc71' ]
+57 http 200 https://registry.npmjs.org/sh
+58 silly get cb [ 200,
+58 silly get   { server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+58 silly get     etag: '"3GZZQVZDGLFD8WFU65PKBTHMU"',
+58 silly get     'content-type': 'application/json',
+58 silly get     'cache-control': 'max-age=60',
+58 silly get     'content-length': '3395',
+58 silly get     'accept-ranges': 'bytes',
+58 silly get     date: 'Tue, 23 Jun 2015 17:44:00 GMT',
+58 silly get     via: '1.1 varnish',
+58 silly get     age: '0',
+58 silly get     connection: 'keep-alive',
+58 silly get     'x-served-by': 'cache-ams4131-AMS',
+58 silly get     'x-cache': 'MISS',
+58 silly get     'x-cache-hits': '0',
+58 silly get     'x-timer': 'S1435081439.994185,VS0,VE98',
+58 silly get     vary: 'Accept' } ]
+59 verbose get saving sh to /Users/Richard/.npm/registry.npmjs.org/sh/.cache.json
+60 verbose git clone --template=/Users/Richard/.npm/_git-remotes/_templates --mirror git://github.com/src/generate_curl_options_list.sh.git /Users/Richard/.npm/_git-remotes/git-github-com-src-generate-curl-options-list-sh-git-1d88dc71: Cloning into bare repository '/Users/Richard/.npm/_git-remotes/git-github-com-src-generate-curl-options-list-sh-git-1d88dc71'...
+60 verbose git clone --template=/Users/Richard/.npm/_git-remotes/_templates --mirror git://github.com/src/generate_curl_options_list.sh.git /Users/Richard/.npm/_git-remotes/git-github-com-src-generate-curl-options-list-sh-git-1d88dc71: fatal: remote error:
+60 verbose git clone --template=/Users/Richard/.npm/_git-remotes/_templates --mirror git://github.com/src/generate_curl_options_list.sh.git /Users/Richard/.npm/_git-remotes/git-github-com-src-generate-curl-options-list-sh-git-1d88dc71:   Repository not found.
+61 silly tryHTTPS attempting to clone git+https://github.com/src/generate_curl_options_list.sh.git
+62 silly tryClone cloning src/generate_curl_options_list.sh via git+https://github.com/src/generate_curl_options_list.sh.git
+63 verbose tryClone https-github-com-src-generate-curl-options-list-sh-git-548f6c8c not in flight; caching
+64 info git [ 'clone',
+64 info git   '--template=/Users/Richard/.npm/_git-remotes/_templates',
+64 info git   '--mirror',
+64 info git   'https://github.com/src/generate_curl_options_list.sh.git',
+64 info git   '/Users/Richard/.npm/_git-remotes/https-github-com-src-generate-curl-options-list-sh-git-548f6c8c' ]
+65 silly addNameRange number 2 { name: 'sh', range: '*', hasData: true }
+66 silly addNameRange versions [ 'sh', [ '0.0.1', '0.0.2', '0.0.3' ] ]
+67 silly addNamed sh@0.0.3
+68 verbose addNamed "0.0.3" is a plain semver version for sh
+69 silly mapToRegistry name sh
+70 silly mapToRegistry using default registry
+71 silly mapToRegistry registry https://registry.npmjs.org/
+72 silly mapToRegistry uri https://registry.npmjs.org/sh
+73 verbose addRemoteTarball https://registry.npmjs.org/sh/-/sh-0.0.3.tgz not in flight; adding
+74 verbose addRemoteTarball [ 'https://registry.npmjs.org/sh/-/sh-0.0.3.tgz',
+74 verbose addRemoteTarball   '116cb7d4be74ef4f29ddbe4a539be3a1b063b41f' ]
+75 info retry fetch attempt 1 at 6:44:00 PM
+76 info attempt registry request try #1 at 6:44:00 PM
+77 http fetch GET https://registry.npmjs.org/sh/-/sh-0.0.3.tgz
+78 http fetch 200 https://registry.npmjs.org/sh/-/sh-0.0.3.tgz
+79 silly fetchAndShaCheck shasum 116cb7d4be74ef4f29ddbe4a539be3a1b063b41f
+80 verbose addTmpTarball /var/folders/vc/pb9xvjqj6p7_m3vdmhwp8wk40000gn/T/npm-80350-600d4c62/registry.npmjs.org/sh/-/sh-0.0.3.tgz not in flight; adding
+81 verbose addTmpTarball already have metadata; skipping unpack for sh@0.0.3
+82 silly cache afterAdd sh@0.0.3
+83 verbose afterAdd /Users/Richard/.npm/sh/0.0.3/package/package.json not in flight; writing
+84 verbose afterAdd /Users/Richard/.npm/sh/0.0.3/package/package.json written
+85 verbose git clone --template=/Users/Richard/.npm/_git-remotes/_templates --mirror https://github.com/src/generate_curl_options_list.sh.git /Users/Richard/.npm/_git-remotes/https-github-com-src-generate-curl-options-list-sh-git-548f6c8c: Cloning into bare repository '/Users/Richard/.npm/_git-remotes/https-github-com-src-generate-curl-options-list-sh-git-548f6c8c'...
+85 verbose git clone --template=/Users/Richard/.npm/_git-remotes/_templates --mirror https://github.com/src/generate_curl_options_list.sh.git /Users/Richard/.npm/_git-remotes/https-github-com-src-generate-curl-options-list-sh-git-548f6c8c: remote: Invalid username or password.
+85 verbose git clone --template=/Users/Richard/.npm/_git-remotes/_templates --mirror https://github.com/src/generate_curl_options_list.sh.git /Users/Richard/.npm/_git-remotes/https-github-com-src-generate-curl-options-list-sh-git-548f6c8c: fatal: Authentication failed for 'https://github.com/src/generate_curl_options_list.sh.git/'
+86 silly trySSH attempting to clone git@github.com:src/generate_curl_options_list.sh.git
+87 silly tryClone cloning src/generate_curl_options_list.sh via git@github.com:src/generate_curl_options_list.sh.git
+88 verbose tryClone git-github-com-src-generate-curl-options-list-sh-git-11319e9b not in flight; caching
+89 info git [ 'clone',
+89 info git   '--template=/Users/Richard/.npm/_git-remotes/_templates',
+89 info git   '--mirror',
+89 info git   'git@github.com:src/generate_curl_options_list.sh.git',
+89 info git   '/Users/Richard/.npm/_git-remotes/git-github-com-src-generate-curl-options-list-sh-git-11319e9b' ]
+90 error git clone --template=/Users/Richard/.npm/_git-remotes/_templates --mirror git@github.com:src/generate_curl_options_list.sh.git /Users/Richard/.npm/_git-remotes/git-github-com-src-generate-curl-options-list-sh-git-11319e9b: Cloning into bare repository '/Users/Richard/.npm/_git-remotes/git-github-com-src-generate-curl-options-list-sh-git-11319e9b'...
+90 error git clone --template=/Users/Richard/.npm/_git-remotes/_templates --mirror git@github.com:src/generate_curl_options_list.sh.git /Users/Richard/.npm/_git-remotes/git-github-com-src-generate-curl-options-list-sh-git-11319e9b: ERROR: Repository not found.
+90 error git clone --template=/Users/Richard/.npm/_git-remotes/_templates --mirror git@github.com:src/generate_curl_options_list.sh.git /Users/Richard/.npm/_git-remotes/git-github-com-src-generate-curl-options-list-sh-git-11319e9b: fatal: Could not read from remote repository.
+90 error git clone --template=/Users/Richard/.npm/_git-remotes/_templates --mirror git@github.com:src/generate_curl_options_list.sh.git /Users/Richard/.npm/_git-remotes/git-github-com-src-generate-curl-options-list-sh-git-11319e9b:
+90 error git clone --template=/Users/Richard/.npm/_git-remotes/_templates --mirror git@github.com:src/generate_curl_options_list.sh.git /Users/Richard/.npm/_git-remotes/git-github-com-src-generate-curl-options-list-sh-git-11319e9b: Please make sure you have the correct access rights
+90 error git clone --template=/Users/Richard/.npm/_git-remotes/_templates --mirror git@github.com:src/generate_curl_options_list.sh.git /Users/Richard/.npm/_git-remotes/git-github-com-src-generate-curl-options-list-sh-git-11319e9b: and the repository exists.
+91 verbose stack Error: Command failed: git clone --template=/Users/Richard/.npm/_git-remotes/_templates --mirror git@github.com:src/generate_curl_options_list.sh.git /Users/Richard/.npm/_git-remotes/git-github-com-src-generate-curl-options-list-sh-git-11319e9b
+91 verbose stack Cloning into bare repository '/Users/Richard/.npm/_git-remotes/git-github-com-src-generate-curl-options-list-sh-git-11319e9b'...
+91 verbose stack ERROR: Repository not found.
+91 verbose stack fatal: Could not read from remote repository.
+91 verbose stack
+91 verbose stack Please make sure you have the correct access rights
+91 verbose stack and the repository exists.
+91 verbose stack
+91 verbose stack     at ChildProcess.exithandler (child_process.js:751:12)
+91 verbose stack     at ChildProcess.emit (events.js:110:17)
+91 verbose stack     at maybeClose (child_process.js:1015:16)
+91 verbose stack     at Socket.<anonymous> (child_process.js:1183:11)
+91 verbose stack     at Socket.emit (events.js:107:17)
+91 verbose stack     at Pipe.close (net.js:485:12)
+92 verbose cwd /Users/Richard/Desktop/wdi_13/projects/project_3
+93 error Darwin 14.3.0
+94 error argv "node" "/usr/local/bin/npm" "install" "sh" "src/generate_curl_options_list.sh"
+95 error node v0.12.2
+96 error npm  v2.11.3
+97 error code 128
+98 error Command failed: git clone --template=/Users/Richard/.npm/_git-remotes/_templates --mirror git@github.com:src/generate_curl_options_list.sh.git /Users/Richard/.npm/_git-remotes/git-github-com-src-generate-curl-options-list-sh-git-11319e9b
+98 error Cloning into bare repository '/Users/Richard/.npm/_git-remotes/git-github-com-src-generate-curl-options-list-sh-git-11319e9b'...
+98 error ERROR: Repository not found.
+98 error fatal: Could not read from remote repository.
+98 error
+98 error Please make sure you have the correct access rights
+98 error and the repository exists.
+99 error If you need help, you may report this error at:
+99 error     <https://github.com/npm/npm/issues>
+100 verbose exit [ 1, true ]
