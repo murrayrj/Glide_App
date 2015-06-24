@@ -100,13 +100,13 @@ function getVideos(location) {
     for (i = 0; i < 20; i++) {
       if (response.data[i].type === "video" && videos.indexOf(response.data[i].id) === -1) {
         console.log(response.data[i]);
+        $('#video-container').prepend('<video src="' + response.data[i].videos.low_resolution.url + '" controls></video>');
+        videos.push(response.data[i].id);
+        
         lat = response.data[i].location.latitude;
         lng = response.data[i].location.longitude;
         myLatlng = new google.maps.LatLng(lat, lng);
-        console.log(response.data[i].location.longitude);
-        $('#video-container').prepend('<video src="' + response.data[i].videos.low_resolution.url + '" controls></video>');
-        videos.push(response.data[i].id);
-        console.log(videos);
+
         marker = new google.maps.Marker({
           position: myLatlng,
           animation: google.maps.Animation.DROP
@@ -115,12 +115,12 @@ function getVideos(location) {
          content: '<div class="pin_info_window"><video width="320" height="240" src="' + response.data[i].videos.low_resolution.url + '" controls></video></div>'
         });
         google.maps.event.addListener(marker, 'click', function() {
-          infowindow.open(map,marker);
+          infowindow.open(map, marker);
         });
         marker.setMap(map);
-        if (videos.length >= 5) {
-          return;
-        } 
+        // if (videos.length >= 5) {
+        //   return;
+        // } 
       }
     }
   });
