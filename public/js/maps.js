@@ -8,8 +8,7 @@ var lng = -0.189897;
 var map;
 var geocoder = new google.maps.Geocoder();
 var marker;
-
-var socket = io('http://d53c5486.ngrok.io');
+var socket = io('http://d913c569.ngrok.io');  
 var videos = [];
 var i;
 
@@ -296,6 +295,7 @@ function initialize() {
       mapTypeIds: [google.maps.MapTypeId.ROADMAP, 'map_style']
     }
   };
+
   myLatlng = new google.maps.LatLng(lat, lng);
   // var image = 'http://postimg.org/image/hml638ypz/';
   var image = 'glide-pin.png';
@@ -306,10 +306,10 @@ function initialize() {
     icon: image,
     animation: google.maps.Animation.DROP
   });
+
   map = new google.maps.Map(mapCanvas, mapOptions);
   map.mapTypes.set('map_style', styledMap);
   map.setMapTypeId('map_style');
-  marker.setMap(map);
 }
 
 // Google Maps render a map on the page with the style describe previously
@@ -343,12 +343,6 @@ function searchFunction(event) {
         dfr.reject('derrp');
       }
       map.setCenter(myLatlng);
-      marker = new google.maps.Marker({
-        position: myLatlng,
-        title: "Hello World!",
-        animation: google.maps.Animation.DROP
-      });
-      marker.setMap(map);
     }
   );
   return dfr.promise();
@@ -360,14 +354,31 @@ function getVideos(location) {
     dataType: 'jsonp'
   }).done(function (response) {
     console.log(response);
+    console.log(location);
     for (i = 0; i < 20; i++) {
       if (response.data[i].type === "video" && videos.indexOf(response.data[i].id) === -1) {
+        console.log(response.data[i]);
+        lat = response.data[i].location.latitude;
+        lng = response.data[i].location.longitude;
+        myLatlng = new google.maps.LatLng(lat, lng);
+        console.log(response.data[i].location.longitude);
+        $('#video-container').prepend('<video src="' + response.data[i].videos.low_resolution.url + '" controls></video>');
+        videos.push(response.data[i].id);
+        console.log(videos);
+        marker = new google.maps.Marker({
+          position: myLatlng,
+          animation: google.maps.Animation.DROP
+        });
+        var infowindow = new google.maps.InfoWindow({
+         content: '<div class="pin_info_window"><video width="320" height="240" src="' + response.data[i].videos.low_resolution.url + '" controls></video></div>'
+        });
+        google.maps.event.addListener(marker, 'click', function() {
+          infowindow.open(map,marker);
+        });
+        marker.setMap(map);
         if (videos.length >= 5) {
           return;
-        } else {
-          $('#video-container').prepend('<li><video src="' + response.data[i].videos.low_resolution.url + '" controls></video></li>');
-          videos.push(response.data[i].id);
-        }
+        } 
       }
     }
   });
@@ -380,15 +391,15 @@ socket.on('connect', function () {
 
 function subsribeToTag(searchTerm) {
   $.ajax({
-    url :'/tags/subscribe', 
-    data: { 
+    url : '/tags/subscribe',
+    data: {
       data: searchTerm
     },
     type: 'POST'
   })
-  .done(function(response) {
-    console.log(response);
-  })
+    .done(function (response) {
+      console.log(response);
+    });
 }
 
 function getTag(event) {
@@ -408,6 +419,4 @@ $(document).ready(function () {
   searchTagForm.on('submit', searchFunction);
   searchTagForm.on('submit', getTag);
 });
-
-
 
