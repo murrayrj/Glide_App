@@ -297,9 +297,13 @@ function initialize() {
     }
   };
   myLatlng = new google.maps.LatLng(lat, lng);
+  // var image = 'http://postimg.org/image/hml638ypz/';
+  var image = 'glide-pin.png';
   marker = new google.maps.Marker({
     position: myLatlng,
     title: "Hello World!",
+    map: map,
+    icon: image,
     animation: google.maps.Animation.DROP
   });
   map = new google.maps.Map(mapCanvas, mapOptions);
