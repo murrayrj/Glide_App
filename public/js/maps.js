@@ -13,6 +13,7 @@ var socket = io('http://a098e9f0.ngrok.io');
 var videos = [];
 var coords;
 var image = '../js/icon_development_small.png';
+var orange = '../js/icon_orange.png';
 var i;
 var j;
 
@@ -436,7 +437,7 @@ function AddCommentPin(event) {
         locationPin = results[0].geometry.location;
         markerPin = new google.maps.Marker({
           map: map,
-          icon: image,
+          icon: orange,
           position: locationPin,
           animation: google.maps.Animation.DROP
         });
