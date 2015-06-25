@@ -9,9 +9,10 @@ var lng = -0.189897;
 var map;
 var geocoder = new google.maps.Geocoder();
 var marker;
-var socket = io('http://d913c569.ngrok.io');  
+var socket = io('http://6be753e2.ngrok.io');  
 var videos = [];
 var coords;
+var image = '../js/icon_development_small.png';
 var i;
 
 // Google maps style
@@ -299,19 +300,15 @@ function initialize() {
   };
   map = new google.maps.Map(mapCanvas, mapOptions);
 
-
   myLatlng = new google.maps.LatLng(lat, lng);
-  // var image = 'http://postimg.org/image/hml638ypz/';
-  var image = '../js/icon_development_small.png';
-  // console.log(image);
-  marker = new google.maps.Marker({
-    position: myLatlng,
-    title: "Hello World!",
-    map: map,
-    icon: image,
-    animation: google.maps.Animation.DROP
-  });
 
+  // marker = new google.maps.Marker({
+  //   position: myLatlng,
+  //   title: "Hello World!",
+  //   map: map,
+  //   icon: image,
+  //   animation: google.maps.Animation.DROP
+  // });
 
   map.mapTypes.set('map_style', styledMap);
   map.setMapTypeId('map_style');
@@ -379,8 +376,11 @@ function getVideos(info) {
             console.log(randlat, randlng)
             rndLatlng = new google.maps.LatLng(randlat, randlng);
             marker = new google.maps.Marker({
-            position: rndLatlng,
-            animation: google.maps.Animation.DROP
+                title: "Hello World!",
+                map: map,
+                icon: image,
+                position: rndLatlng,
+                animation: google.maps.Animation.DROP
             });
             var infowindow = new google.maps.InfoWindow({
             content: '<div class="pin_info_window"><video width="260" height="260" src="' + response.data[i].videos.low_resolution.url + '" controls></video></div>'
