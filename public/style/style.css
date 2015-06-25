@@ -115,19 +115,21 @@ box-sizing: border-box;
 
 #toggle + label {
   position:absolute;
+  right: 350px;
   cursor:pointer;
   padding:10px;
-  background: #26ae90;
-width: 100px;
-border-radius: 3px;
+ /* background: #26ae90;*/
+/*width: 100px;
+*/
+/*border-radius: 3px;*/
 padding: 8px 10px;
-color: #FFF;
+/*color: #FFF;*/
 line-height:20px;
-font-size:12px;
+font-size:23px;
 text-align:center;
 -webkit-font-smoothing: antialiased;
 cursor: pointer;
-  margin:20px 50px;
+  margin:55px 50px;
   transition:all 500ms ease;
 }
 #toggle + label:after {
@@ -136,7 +138,7 @@ cursor: pointer;
 
 .container-nav {
 transition: margin 300ms cubic-bezier(0.17, 0.04, 0.03, 0.94);
-  padding:1em 3em;
+  padding:0.5em 3em;
 }
 
 #toggle:checked ~ .message {
@@ -148,7 +150,12 @@ transition: margin 300ms cubic-bezier(0.17, 0.04, 0.03, 0.94);
 }
 
 #toggle:checked + label {
-  background:#dd6149;
+  background: #24EFF2;
+  color: white;
+  width: 240px;
+  height: 100%;
+  margin-top: 0px;
+  padding-top: 55px;
 }
 
 #toggle:checked + label:after {
