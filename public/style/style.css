@@ -221,7 +221,7 @@ cursor: pointer;
 }
 
 .container-nav {
-transition: margin 300ms cubic-bezier(0.17, 0.04, 0.03, 0.94);
+  transition: margin 300ms cubic-bezier(0.17, 0.04, 0.03, 0.94);
   padding:0.5em 3em;
 }
 
@@ -250,4 +250,26 @@ transition: margin 300ms cubic-bezier(0.17, 0.04, 0.03, 0.94);
   display: block;
   font-size: 18px;
   color:#24EFF2;
+}
+
+#pin_info_window video {
+  display: block;
+  margin: 0 auto;
+  font-size: 18px;
+  color:#24EFF2;
+}
+
+
+
+.spinner {
+    position: fixed;
+    top: 0;
+    left: 50%;
+    margin-left: -50px; /* half width of the spinner gif */
+    /*margin-top: -50px;*/  half height of the spinner gif 
+    text-align:center;
+    z-index:1234;
+    overflow: auto;
+    width: 100px; /* width of the spinner gif */
+    height: 102px; /*hight of the spinner gif +2px to fix IE8 issue */
 }
