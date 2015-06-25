@@ -2,14 +2,14 @@
 var searchTagForm = $('#tag_search_form');
 var searchTag = $('#search_tag'); // <--Search input folder
 var searchTagValue = ''; // <--- Value of the input form
-var myLatlng = {A: 51.534488, F: -0.189897}; // <--- Coordinates of the search, return i.e. {A: 48.856614, F: 2.3522219000000177}
+var myLatlng = {A: 51.520184, F: -0.071013}; // <--- Coordinates of the search, return i.e. {A: 48.856614, F: 2.3522219000000177}
 var rndLatlng;
-var lat = 51.534488;
-var lng = -0.189897;
+var lat = 51.520184;
+var lng = -0.071013;
 var map;
 var geocoder = new google.maps.Geocoder();
 var marker;
-var socket = io('http://6be753e2.ngrok.io'); 
+var socket = io('http://a098e9f0.ngrok.io');
 var videos = [];
 var coords;
 var image = '../js/icon_development_small.png';
@@ -387,7 +387,7 @@ function getVideos(info) {
             console.log(coordLat);
             console.log(coordLng);
             console.log('location null / WINNIIIIIIINNNNNNGGGGG!!!!!!')
-            var randlat = coordLat + (0.014*(Math.random().toFixed(5)-0.5))
+            var randlat = coordLat + (0.014*s(Math.random().toFixed(5)-0.5))
             var randlng = coordLng + (0.014*(Math.random().toFixed(5)-0.5))
             console.log(randlat, randlng)
             rndLatlng = new google.maps.LatLng(randlat, randlng);
@@ -435,7 +435,6 @@ function getVideos(info) {
   });
 }
 
-
 socket.on('connect', function () {
   console.log('Connected!');
 });
@@ -457,17 +456,40 @@ function getTag(event) {
   var promise = event.result;
   promise.then(function (coordinates) {
     subsribeToTag(coordinates.searchTerm);
-    console.log(coordinates);
-    console.log(coordinates.searchTerm);
+
     socket.on('instagram', function () {
       getVideos(coordinates);
     });
   });
 }
 
+// add pin to map with comment
+function AddCommentPin(event) {
+  event.preventDefault();
+  searchLocation = $('.add-pin-loc-box').val();
+  geocoder.geocode(
+    {'address': searchLocation},
+    function (results, status) {
+      if (status === google.maps.GeocoderStatus.OK) {
+        locationPin = results[0].geometry.location;
+        marker = new google.maps.Marker({
+          map: map,
+          icon: image,
+          position: locationPin,
+          animation: google.maps.Animation.DROP
+        });
+      } else {
+        alert("Not found: " + status);
+      }
+      map.setCenter(locationPin);
+    }
+  );
+}
+
 //Event listeners
 $(document).ready(function () {
   searchTagForm.on('submit', searchFunction);
   searchTagForm.on('submit', getTag);
+  $('#add_pin_form').on('submit', AddCommentPin);
 });
 
