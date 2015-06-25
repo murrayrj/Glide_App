@@ -370,7 +370,9 @@ function getVideos(info) {
         var videoURL = response.data[i].videos.low_resolution.url;
         var tags = response.data[i].tags;
         var tagsOnWindow = [];
-        var contentHTML = '<div class="pin_info_window"><p>@' + username + '</p><video width="260" height="260" src="' + videoURL + '" controls></video><p>'+ tags +'</p></div>';
+        var contentHTML = '<div class="pin_info_window"><p>@' + username + '</p>';
+        contentHTML += '<video width="260" height="260" src="' + videoURL + '" controls></video>';
+        contentHTML += '<p>'+ tags +'</p></div>';
 
         // function hashTags (tags);
         //   for (var i =0;  tags.length - 1; i >= 0; i++) {
