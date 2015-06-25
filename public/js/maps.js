@@ -386,7 +386,7 @@ function getVideos(info) {
                 animation: google.maps.Animation.DROP
           });
           var infowindow = new google.maps.InfoWindow({
-              content: '<div class="pin_info_window"><p>@' + response.data[i].caption.from.username + '</p><video width="260" height="260" src="' + response.data[i].videos.low_resolution.url + '" controls></video></div>'
+              content: '<div class="pin_info_window"><p>@' + response.data[i].caption.from.username + '</p><video width="260" height="260" src="' + response.data[i].videos.low_resolution.url + '" controls></video><p>'+ response.data[i].tags +'</p></div>'
             });
           google.maps.event.addListener(marker, 'click', function () {
             infowindow.open(map, marker);
