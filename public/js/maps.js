@@ -10,7 +10,7 @@ var map;
 var geocoder = new google.maps.Geocoder();
 // var marker;
 var markerPin;
-var socket = io('http://a098e9f0.ngrok.io');
+var socket = io('http://66975c74.ngrok.io'); 
 var videos = [];
 var coords;
 var image = '../js/icon_development_small.png';
@@ -358,7 +358,7 @@ function getVideos(info) {
   var coordLng = info.lng;
   var location = info.searchTerm;
   return $.ajax({
-    url: 'https://api.instagram.com/v1/tags/' + location + '/media/recent?client_id=fee1f7a9b22c41149f86e7a44f199935',
+    url: 'https://api.instagram.com/v1/tags/' + location + '/media/recent?client_id=cd753ef8a5e34d0ab2fac25900e8b0b0',
     dataType: 'jsonp'
   }).done(function (response) {
     console.log(response);
