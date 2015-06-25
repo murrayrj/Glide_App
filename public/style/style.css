@@ -2,6 +2,7 @@ body {
 	/*background-color: white;*/
   font-family: 'Montserrat', sans-serif;
   font-size: 20px;
+  color: #24EFF2;
 }
 
 /*#map-canvas {
@@ -16,7 +17,7 @@ body {
   z-index: 1;
 }
 
-header {
+.header {
   width: 100%;
   display: inline-block;
   color: #24EFF2;
@@ -129,12 +130,12 @@ cursor: pointer;
   transition:all 500ms ease;
 }
 #toggle + label:after {
-  content:"Open" 
+  content:"Trending Glides" 
 }
 
 .container-nav {
 transition: margin 300ms cubic-bezier(0.17, 0.04, 0.03, 0.94);
-  padding:5em 3em;
+  padding:1em 3em;
 }
 
 #toggle:checked ~ .message {
@@ -150,7 +151,7 @@ transition: margin 300ms cubic-bezier(0.17, 0.04, 0.03, 0.94);
 }
 
 #toggle:checked + label:after {
-  content:"Close"
+  content:"Trending Glides"
 }
 
 
