@@ -9,10 +9,6 @@ var CommentSchema = new mongoose.Schema({
 });
 
 var PinSchema = new mongoose.Schema({
-  text: {
-    type: String,
-    default: ""
-  },
   location: {
     type: String,
     default: ""
@@ -21,7 +17,7 @@ var PinSchema = new mongoose.Schema({
     type: Number,
     default: 0
   },
-  comment: [CommentSchema]
+  comments: []
 });
 
 var Pin = mongoose.model("Pin", PinSchema);
