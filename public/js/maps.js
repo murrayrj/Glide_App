@@ -370,7 +370,7 @@ function getVideos(info) {
         var tags = response.data[i].tags;
         var tagsOnWindow = [];
         var tagInWindow = tagsForWindow(tags);
-        var contentHTML = '<div class="pin_info_window"><a href="https://instagram.com/'+ username +'">@'+username +'</a>'
+        var contentHTML = '<div id="pin_info_window"><a href="https://instagram.com/'+ username +' target="_blank">@'+username +'</a>'
         contentHTML += '<video width="230" height="230" src="' + videoURL + '" controls></video>' + tagInWindow +'</div>';
 
         function tagsForWindow(tags){
