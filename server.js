@@ -21,8 +21,8 @@ app.set('views', './views');
 app.set('view engine', 'ejs');
 
 instagram.set('client_id', process.env.INSTAGRAM_CLIENT_ID);
-instagram.set('client_secret', process.env.INSTAGRAM_CLIENT_SECRET);
-instagram.set('callback_url', 'http://a098e9f0.ngrok.io/callback');
+instagram.set('client_secret', '0526486007d44e8eac7edb211b03fbe3');
+instagram.set('callback_url', 'http://66975c74.ngrok.io/callback'); 
 instagram.set('maxSockets', 50);
 
 app.get('/', function (req, res) {
