@@ -9,21 +9,28 @@
   <link rel="stylesheet" type="text/css" href="style/normalize.css">
   <title>Glide</title>
 </head>
-<header>
-  <div class="logo-pos">
-    <h1>GLIDE</h1>
-  </div>
-  <div class="nav-button-pos">
-    <ul>
-      <li>Whats Gliding Right Now?</li>
-      <li>Create A New Glide</li>
-    </ul>
-  </div>
-  <div class"trending-result">
-    <h3>What is trending now!</h3>
-  </div>  
-</header>
 <body>
+
+
+
+
+  
+<input type="checkbox" name="toggle" id="toggle" />
+<label for="toggle"></label>
+
+  <div class="container-nav">
+    <div class="logo-pos">
+        <h1>GLIDE</h1>
+      </div>
+      <div class="nav-button-pos">
+        <ul>
+
+          <li>Create A New Glide</li>
+        </ul>
+      </div>
+</div>  
+
+
   <ul class="small-block-grid-8" id="video-container">
   </ul>
   <div id="map-canvas"></div> 
@@ -31,11 +38,16 @@
   <div class="search-pos">
     <div id="search-box">
   	 <form id="tag_search_form"> 
-        <input type="text" placeholder="Enter a location" id="search_tag">
-        <input type="submit" value="Search">
+  	 	<input class="type-box" type="text" placeholder="Enter a location" id="search_tag">
+  		<input id="submit-button" type="submit" value="Glide">
   	 </form>
     </div>
   </div>  
+
+<div class="message"><h1> This is the trending box.</h1>
+  </div>
+
+
 </body>
 <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
 
