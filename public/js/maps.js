@@ -388,38 +388,21 @@ function getVideos(info) {
           return ("<p>").concat(tagsWithHash.join(' ')).concat("</p>");
         }
 
+        var lat;
+        var lng;
 
         if (response.data[i].location === null || response.data[i].location.id > 0) {
-            console.log(response.data[i]);
-            console.log(response.data[i].caption.from.username);
-            console.log(response.data[i].tags);
-            console.log(coordLat);
-            console.log(coordLng);
-            console.log('location null')
-            var randlat = coordLat + (0.014*(Math.random().toFixed(5)-0.5))
-            var randlng = coordLng + (0.014*(Math.random().toFixed(5)-0.5))
-            console.log(randlat, randlng)
-            // rndLatlng = new google.maps.LatLng(randlat, randlng);
-            randomMarker = new google.maps.Marker({
-                title: "Hello World!",
-                map: map,
-                icon: image,
-                position: new google.maps.LatLng(randlat, randlng),
-                animation: google.maps.Animation.DROP
-          });
-          var infowindow = new google.maps.InfoWindow({
-              // content: '<div class="pin_info_window"><p>@' + username + '</p><video width="260" height="260" src="' + videoURL + '" controls></video><p>'+ tags +'</p></div>'
-              content: contentHTML
-            });
-          google.maps.event.addListener(randomMarker, 'click', function () {
-            console.log(randomMarker, 'randomMarker');
-            infowindow.open(map, randomMarker);
-          });
-          randomMarker.setMap(map);
+            
+            lat = coordLat + (0.014*(Math.random().toFixed(5)-0.5))
+            lng = coordLng + (0.014*(Math.random().toFixed(5)-0.5))
+
         } else {
-          console.log('given location');
-          lat = response.data[i].location.latitude;
-          lng = response.data[i].location.longitude;
+
+            lat = response.data[i].location.latitude;
+            lng = response.data[i].location.longitude;
+
+        }
+          
           myLatlng = new google.maps.LatLng(lat, lng);
 
           var marker = new google.maps.Marker({
@@ -439,7 +422,7 @@ function getVideos(info) {
           //   return;
           // } 
         // }
-        }
+
       }
     }
   });
