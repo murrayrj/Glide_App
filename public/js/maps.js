@@ -363,7 +363,6 @@ function getVideos(info) {
     for (i = 0; i < 20; i++) {
       if (response.data[i].type === "video" && videos.indexOf(response.data[i].id) === -1) {
         console.log(response.data[i]);
-
         // $('#video-container').prepend('<video src="' + response.data[i].videos.low_resolution.url + '" controls></video>');
         videos.push(response.data[i].id);
         var username = response.data[i].caption.from.username;
@@ -371,8 +370,8 @@ function getVideos(info) {
         var tags = response.data[i].tags;
         var tagsOnWindow = [];
         var tagInWindow = tagsForWindow(tags);
-        var contentHTML = '<div class="pin_info_window"><p>@' + username + '</p>';
-        contentHTML += '<video width="260" height="260" src="' + videoURL + '" controls></video>' + tagInWindow +'</div>';
+        var contentHTML = '<div class="pin_info_window"><a href="https://instagram.com/'+ username +'">@'+username +'</a>'
+        contentHTML += '<video width="230" height="230" src="' + videoURL + '" controls></video>' + tagInWindow +'</div>';
 
         function tagsForWindow(tags){
           var tagsWithHash = [];
@@ -380,7 +379,6 @@ function getVideos(info) {
             var tempString = ('#').concat(tags[i]);
             tagsWithHash.push(tempString);
           }
-
           return ("<p>").concat(tagsWithHash.join(' ')).concat("</p>");
         }
 
