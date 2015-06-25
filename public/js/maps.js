@@ -8,7 +8,8 @@ var lat = 51.520184;
 var lng = -0.071013;
 var map;
 var geocoder = new google.maps.Geocoder();
-var marker;
+// var marker;
+var markerPin;
 var socket = io('http://a098e9f0.ngrok.io');
 var videos = [];
 var coords;
@@ -370,12 +371,12 @@ function getVideos(info) {
         var tags = response.data[i].tags;
         var tagsOnWindow = [];
         var tagInWindow = tagsForWindow(tags);
-        var contentHTML = '<div class="pin_info_window"><a href="https://instagram.com/'+ username +'">@'+username +'</a>'
-        contentHTML += '<video width="230" height="230" src="' + videoURL + '" controls></video>' + tagInWindow +'</div>';
+        var contentHTML = '<div class="pin_info_window"><a href="https://instagram.com/' + username + '">@' + username + '</a>';
+        contentHTML += '<video width="230" height="230" src="' + videoURL + '" controls></video>' + tagInWindow + '</div>';
 
-        function tagsForWindow(tags){
+        function tagsForWindow(tags) {
           var tagsWithHash = [];
-          for(var i=0; i<5; i++){
+          for (var i=0; i<5; i++) {
             var tempString = ('#').concat(tags[i]);
             tagsWithHash.push(tempString);
           }
@@ -389,33 +390,34 @@ function getVideos(info) {
             console.log(response.data[i].tags);
             console.log(coordLat);
             console.log(coordLng);
-            console.log('location null / WINNIIIIIIINNNNNNGGGGG!!!!!!')
-            var randlat = coordLat + (0.014*s(Math.random().toFixed(5)-0.5))
+            console.log('location null')
+            var randlat = coordLat + (0.014*(Math.random().toFixed(5)-0.5))
             var randlng = coordLng + (0.014*(Math.random().toFixed(5)-0.5))
             console.log(randlat, randlng)
-            rndLatlng = new google.maps.LatLng(randlat, randlng);
-            marker = new google.maps.Marker({
+            // rndLatlng = new google.maps.LatLng(randlat, randlng);
+            randomMarker = new google.maps.Marker({
                 title: "Hello World!",
                 map: map,
                 icon: image,
-                position: rndLatlng,
+                position: new google.maps.LatLng(randlat, randlng),
                 animation: google.maps.Animation.DROP
           });
           var infowindow = new google.maps.InfoWindow({
               // content: '<div class="pin_info_window"><p>@' + username + '</p><video width="260" height="260" src="' + videoURL + '" controls></video><p>'+ tags +'</p></div>'
               content: contentHTML
             });
-          google.maps.event.addListener(marker, 'click', function () {
-            infowindow.open(map, marker);
+          google.maps.event.addListener(randomMarker, 'click', function () {
+            console.log(randomMarker, 'randomMarker');
+            infowindow.open(map, randomMarker);
           });
-          marker.setMap(map);
+          randomMarker.setMap(map);
         } else {
           console.log('given location');
           lat = response.data[i].location.latitude;
           lng = response.data[i].location.longitude;
           myLatlng = new google.maps.LatLng(lat, lng);
 
-          marker = new google.maps.Marker({
+          var marker = new google.maps.Marker({
             position: myLatlng,
             map: map,
             icon: image,
@@ -475,12 +477,19 @@ function AddCommentPin(event) {
     function (results, status) {
       if (status === google.maps.GeocoderStatus.OK) {
         locationPin = results[0].geometry.location;
-        marker = new google.maps.Marker({
+        markerPin = new google.maps.Marker({
           map: map,
           icon: image,
           position: locationPin,
           animation: google.maps.Animation.DROP
         });
+        var commentWindow = new google.maps.InfoWindow({
+          content: $('.add-pin-comment-box').val()
+        });
+        google.maps.event.addListener(markerPin, 'click', function () {
+          commentWindow.open(map, markerPin);
+        });
+        markerPin.setMap(map);
       } else {
         alert("Not found: " + status);
       }
