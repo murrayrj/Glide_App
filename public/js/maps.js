@@ -364,8 +364,19 @@ function getVideos(info) {
       if (response.data[i].type === "video" && videos.indexOf(response.data[i].id) === -1) {
         console.log(response.data[i]);
 
-        $('#video-container').prepend('<video src="' + response.data[i].videos.low_resolution.url + '" controls></video>');
+        // $('#video-container').prepend('<video src="' + response.data[i].videos.low_resolution.url + '" controls></video>');
         videos.push(response.data[i].id);
+        var username = response.data[i].caption.from.username;
+        var videoURL = response.data[i].videos.low_resolution.url;
+        var tags = response.data[i].tags;
+        var tagsOnWindow = [];
+        var contentHTML = '<div class="pin_info_window"><p>@' + username + '</p><video width="260" height="260" src="' + videoURL + '" controls></video><p>'+ tags +'</p></div>';
+
+        function hashTags (tags);
+          for (var i =0;  tags.length - 1; i >= 0; i++) {
+            tags[i]
+          };
+
 
         if (response.data[i].location === null || response.data[i].location.id > 0) {
             console.log(response.data[i]);
@@ -386,7 +397,8 @@ function getVideos(info) {
                 animation: google.maps.Animation.DROP
           });
           var infowindow = new google.maps.InfoWindow({
-              content: '<div class="pin_info_window"><p>@' + response.data[i].caption.from.username + '</p><video width="260" height="260" src="' + response.data[i].videos.low_resolution.url + '" controls></video><p>'+ response.data[i].tags +'</p></div>'
+              // content: '<div class="pin_info_window"><p>@' + username + '</p><video width="260" height="260" src="' + videoURL + '" controls></video><p>'+ tags +'</p></div>'
+              content: contentHTML
             });
           google.maps.event.addListener(marker, 'click', function () {
             infowindow.open(map, marker);
@@ -405,7 +417,7 @@ function getVideos(info) {
             animation: google.maps.Animation.DROP
           });
           var infowindow = new google.maps.InfoWindow({
-              content: '<div class="pin_info_window"><video width="260" height="260" src="' + response.data[i].videos.low_resolution.url + '" controls></video></div>'
+              content: contentHTML
             });
           google.maps.event.addListener(marker, 'click', function () {
             infowindow.open(map, marker);
