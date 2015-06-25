@@ -245,3 +245,9 @@ transition: margin 300ms cubic-bezier(0.17, 0.04, 0.03, 0.94);
 #toggle2:checked + label:after {
   content:"Add A Glide Post"
 }
+
+#pin_info_window a {
+  display: block;
+  font-size: 18px;
+  color:#24EFF2;
+}
