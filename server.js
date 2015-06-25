@@ -22,7 +22,7 @@ app.set('view engine', 'ejs');
 
 instagram.set('client_id', process.env.INSTAGRAM_CLIENT_ID);
 instagram.set('client_secret', process.env.INSTAGRAM_CLIENT_SECRET);
-instagram.set('callback_url', 'http://6be753e2.ngrok.io/callback');
+instagram.set('callback_url', 'http://a098e9f0.ngrok.io/callback');
 instagram.set('maxSockets', 50);
 
 app.get('/', function (req, res) {
@@ -68,3 +68,23 @@ server.listen(port, function () {
   console.log('Pedro, Laura and Richard are cool!');
 });
 
+app.get('/pins', function(req, res){
+   db.Pin.find({}, function(err, pins){
+    res.send(pins);
+  })
+})
+
+app.post('/pins', function(req, res){
+  db.Pin.create(req.body, function(err, comment){
+    res.send(201, comment); //success, object created
+  })
+})
+
+app.delete("/pins/:id", function (req, res){
+  var pinId = req.params.id;
+  db.Pin.findByIdAndRemove({
+    _id: pinId
+  }, function(err, comment){
+    res.send(204); //Success, no content
+  })
+});

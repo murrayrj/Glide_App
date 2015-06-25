@@ -1,15 +1,15 @@
 var mongoose = require("mongoose");
-mongoose.connect("mongodb://localhost/locationdb");
+mongoose.connect("mongodb://localhost/pindb");
 
-var TagSchema = new mongoose.Schema({
-  name: {
+var CommentSchema = new mongoose.Schema({
+  text: {
     type: String,
     default: ''
   }
 });
 
-var LocationSchema = new mongoose.Schema({
-  text: {
+var PinSchema = new mongoose.Schema({
+  location: {
     type: String,
     default: ""
   },
@@ -17,10 +17,10 @@ var LocationSchema = new mongoose.Schema({
     type: Number,
     default: 0
   },
-  tags: [TagSchema]
+  comments: []
 });
 
-var Location = mongoose.model("Location", LocationSchema);
-var Tag = mongoose.model("Tag", TagSchema);
-module.exports.Location = Location;
-module.exports.Tag = Tag;
+var Pin = mongoose.model("Pin", PinSchema);
+var Comment = mongoose.model("Comment", CommentSchema);
+module.exports.Pin = Pin;
+module.exports.Comment = Comment;

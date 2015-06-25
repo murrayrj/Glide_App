@@ -3,14 +3,14 @@ var searchTagForm = $('#tag_search_form');
 var searchTag = $('#search_tag'); // <--Search input folder
 var searchTagValue = ''; // <--- Value of the input form
 var myLatlng = {A: 51.534488, F: -0.189897}; // <--- Coordinates of the search, return i.e. {A: 48.856614, F: 2.3522219000000177}
-
 var rndLatlng;
-var lat = 51.534488;
-var lng = -0.189897;
+var lat = 51.520184;
+var lng = -0.071013;
 var map;
 var geocoder = new google.maps.Geocoder();
-var marker;
-var socket = io('http://6be753e2.ngrok.io'); 
+// var marker;
+var markerPin;
+var socket = io('http://a098e9f0.ngrok.io');
 var videos = [];
 var coords;
 var image = '../js/icon_development_small.png';
@@ -321,6 +321,8 @@ google.maps.event.addDomListener(window, 'load', initialize);
 
 // This function return the input value as coordinates and store it on a variables called loc
 function searchFunction(event) {
+  //show the spinner
+  $('#spinner').show();
   var dfr = $.Deferred();
   event.preventDefault();
   searchTagValue = $('#search_tag').val();
@@ -363,57 +365,50 @@ function getVideos(info) {
     console.log(location);
     for (i = 0; i < 20; i++) {
       if (response.data[i].type === "video" && videos.indexOf(response.data[i].id) === -1) {
+        $('#spinner').hide();
         console.log(response.data[i]);
-
         // $('#video-container').prepend('<video src="' + response.data[i].videos.low_resolution.url + '" controls></video>');
         videos.push(response.data[i].id);
         var username = response.data[i].caption.from.username;
         var videoURL = response.data[i].videos.low_resolution.url;
         var tags = response.data[i].tags;
         var tagsOnWindow = [];
-        var contentHTML = '<div class="pin_info_window"><p>@' + username + '</p>';
-        contentHTML += '<video width="260" height="260" src="' + videoURL + '" controls></video>';
-        contentHTML += '<p>'+ tags +'</p></div>';
+        var tagInWindow = tagsForWindow(tags);
 
-        // function hashTags (tags);
-        //   for (var i =0;  tags.length - 1; i >= 0; i++) {
-        //     tags[i]
-        //   };
+        // var contentHTML = '<div class="pin_info_window"><a href="https://instagram.com/' + username + '">@' + username + '</a>';
+        // contentHTML += '<video width="230" height="230" src="' + videoURL + '" controls></video>' + tagInWindow + '</div>';
 
+        var contentHTML = '<div id="pin_info_window"><a href="https://instagram.com/'+ username +' target="_blank">@'+username +'</a>'
+        contentHTML += '<video width="230" height="230" src="' + videoURL + '" controls></video>' + tagInWindow +'</div>';
+
+
+        function tagsForWindow(tags) {
+          var tagsWithHash = [];
+          for (var i=0; i<5; i++) {
+            var tempString = ('#').concat(tags[i]);
+            tagsWithHash.push(tempString);
+          }
+          return ("<p>").concat(tagsWithHash.join(' ')).concat("</p>");
+        }
+
+        var lat;
+        var lng;
 
         if (response.data[i].location === null || response.data[i].location.id > 0) {
-            console.log(response.data[i]);
-            console.log(response.data[i].caption.from.username);
-            console.log(response.data[i].tags);
-            console.log(coordLat);
-            console.log(coordLng);
-            console.log('location null / WINNIIIIIIINNNNNNGGGGG!!!!!!')
-            var randlat = coordLat + (0.014*(Math.random().toFixed(5)-0.5))
-            var randlng = coordLng + (0.014*(Math.random().toFixed(5)-0.5))
-            console.log(randlat, randlng)
-            rndLatlng = new google.maps.LatLng(randlat, randlng);
-            marker = new google.maps.Marker({
-                title: "Hello World!",
-                map: map,
-                icon: image,
-                position: rndLatlng,
-                animation: google.maps.Animation.DROP
-          });
-          var infowindow = new google.maps.InfoWindow({
-              // content: '<div class="pin_info_window"><p>@' + username + '</p><video width="260" height="260" src="' + videoURL + '" controls></video><p>'+ tags +'</p></div>'
-              content: contentHTML
-            });
-          google.maps.event.addListener(marker, 'click', function () {
-            infowindow.open(map, marker);
-          });
-          marker.setMap(map);
+            
+            lat = coordLat + (0.014*(Math.random().toFixed(5)-0.5))
+            lng = coordLng + (0.014*(Math.random().toFixed(5)-0.5))
+
         } else {
-          console.log('given location');
-          lat = response.data[i].location.latitude;
-          lng = response.data[i].location.longitude;
+
+            lat = response.data[i].location.latitude;
+            lng = response.data[i].location.longitude;
+
+        }
+          
           myLatlng = new google.maps.LatLng(lat, lng);
 
-          marker = new google.maps.Marker({
+          var marker = new google.maps.Marker({
             position: myLatlng,
             map: map,
             icon: image,
@@ -430,12 +425,11 @@ function getVideos(info) {
           //   return;
           // } 
         // }
-        }
+
       }
     }
   });
 }
-
 
 socket.on('connect', function () {
   console.log('Connected!');
@@ -458,17 +452,47 @@ function getTag(event) {
   var promise = event.result;
   promise.then(function (coordinates) {
     subsribeToTag(coordinates.searchTerm);
-    console.log(coordinates);
-    console.log(coordinates.searchTerm);
+
     socket.on('instagram', function () {
       getVideos(coordinates);
     });
   });
 }
 
+// add pin to map with comment
+function AddCommentPin(event) {
+  event.preventDefault();
+  searchLocation = $('.add-pin-loc-box').val();
+  geocoder.geocode(
+    {'address': searchLocation},
+    function (results, status) {
+      if (status === google.maps.GeocoderStatus.OK) {
+        locationPin = results[0].geometry.location;
+        markerPin = new google.maps.Marker({
+          map: map,
+          icon: image,
+          position: locationPin,
+          animation: google.maps.Animation.DROP
+        });
+        var commentWindow = new google.maps.InfoWindow({
+          content: $('.add-pin-comment-box').val()
+        });
+        google.maps.event.addListener(markerPin, 'click', function () {
+          commentWindow.open(map, markerPin);
+        });
+        markerPin.setMap(map);
+      } else {
+        alert("Not found: " + status);
+      }
+      map.setCenter(locationPin);
+    }
+  );
+}
+
 //Event listeners
 $(document).ready(function () {
   searchTagForm.on('submit', searchFunction);
   searchTagForm.on('submit', getTag);
+  $('#add_pin_form').on('submit', AddCommentPin);
 });
 
