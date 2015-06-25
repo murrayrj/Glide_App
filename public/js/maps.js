@@ -372,10 +372,10 @@ function getVideos(info) {
         var tagsOnWindow = [];
         var contentHTML = '<div class="pin_info_window"><p>@' + username + '</p><video width="260" height="260" src="' + videoURL + '" controls></video><p>'+ tags +'</p></div>';
 
-        function hashTags (tags);
-          for (var i =0;  tags.length - 1; i >= 0; i++) {
-            tags[i]
-          };
+        // function hashTags (tags);
+        //   for (var i =0;  tags.length - 1; i >= 0; i++) {
+        //     tags[i]
+        //   };
 
 
         if (response.data[i].location === null || response.data[i].location.id > 0) {
