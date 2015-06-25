@@ -368,8 +368,11 @@ function getVideos(info) {
         videos.push(response.data[i].id);
 
         if (response.data[i].location === null || response.data[i].location.id > 0) {
-            console.log(coordLat)
-            console.log(coordLng)
+            console.log(response.data[i]);
+            console.log(response.data[i].caption.from.username);
+            console.log(response.data[i].tags);
+            console.log(coordLat);
+            console.log(coordLng);
             console.log('location null / WINNIIIIIIINNNNNNGGGGG!!!!!!')
             var randlat = coordLat + (0.014*(Math.random().toFixed(5)-0.5))
             var randlng = coordLng + (0.014*(Math.random().toFixed(5)-0.5))
@@ -383,7 +386,7 @@ function getVideos(info) {
                 animation: google.maps.Animation.DROP
           });
           var infowindow = new google.maps.InfoWindow({
-              content: '<div class="pin_info_window"><video width="260" height="260" src="' + response.data[i].videos.low_resolution.url + '" controls></video></div>'
+              content: '<div class="pin_info_window"><p>@' + response.data[i].caption.from.username + '</p><video width="260" height="260" src="' + response.data[i].videos.low_resolution.url + '" controls></video></div>'
             });
           google.maps.event.addListener(marker, 'click', function () {
             infowindow.open(map, marker);
