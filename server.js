@@ -22,7 +22,7 @@ app.set('view engine', 'ejs');
 
 instagram.set('client_id', process.env.INSTAGRAM_CLIENT_ID);
 instagram.set('client_secret', process.env.INSTAGRAM_CLIENT_SECRET);
-instagram.set('callback_url', 'http://66975c74.ngrok.io/callback');
+instagram.set('callback_url', 'http://d913c569.ngrok.io/callback');
 instagram.set('maxSockets', 50);
 
 app.get('/', function (req, res) {

@@ -3,13 +3,15 @@ var searchTagForm = $('#tag_search_form');
 var searchTag = $('#search_tag'); // <--Search input folder
 var searchTagValue = ''; // <--- Value of the input form
 var myLatlng = {A: 51.534488, F: -0.189897}; // <--- Coordinates of the search, return i.e. {A: 48.856614, F: 2.3522219000000177}
+var rndLatlng;
 var lat = 51.534488;
 var lng = -0.189897;
 var map;
 var geocoder = new google.maps.Geocoder();
 var marker;
-var socket = io('http://66975c74.ngrok.io');  
+var socket = io('http://d913c569.ngrok.io');  
 var videos = [];
+var coords;
 var i;
 
 // Google maps style
@@ -331,7 +333,7 @@ function searchFunction(event) {
         myLatlng = results[0].geometry.location;
         lat = results[0].geometry.location.lat();
         lng = results[0].geometry.location.lng();
-        var coords = {
+        coords = {
             searchTerm: searchTagValue,
             lat: lat,
             lng: lng
@@ -351,9 +353,12 @@ function searchFunction(event) {
   return dfr.promise();
 }
 
-function getVideos(location) {
+function getVideos(info) {
+  var coordLat = info.lat
+  var coordLng = info.lng
+  var location = info.searchTerm
   return $.ajax({
-    url: 'https://api.instagram.com/v1/tags/' + location + '/media/recent?client_id=153b4749d14347c7ae070c0fe71eaed7',
+    url: 'https://api.instagram.com/v1/tags/' + location + '/media/recent?client_id=fee1f7a9b22c41149f86e7a44f199935',
     dataType: 'jsonp'
   }).done(function (response) {
     console.log(response);
@@ -361,32 +366,59 @@ function getVideos(location) {
     for (i = 0; i < 20; i++) {
       if (response.data[i].type === "video" && videos.indexOf(response.data[i].id) === -1) {
         console.log(response.data[i]);
-        lat = response.data[i].location.latitude;
-        lng = response.data[i].location.longitude;
-        myLatlng = new google.maps.LatLng(lat, lng);
-        console.log(response.data[i].location.longitude);
+
         $('#video-container').prepend('<video src="' + response.data[i].videos.low_resolution.url + '" controls></video>');
         videos.push(response.data[i].id);
-        console.log(videos);
-        marker = new google.maps.Marker({
+
+        if (response.data[i].location === null || response.data[i].location.id > 0) {
+            console.log(coordLat)
+            console.log(coordLng)
+            console.log('location null / WINNIIIIIIINNNNNNGGGGG!!!!!!')
+            var randlat = coordLat + (0.014*(Math.random().toFixed(5)-0.5))
+            var randlng = coordLng + (0.014*(Math.random().toFixed(5)-0.5))
+            console.log(randlat, randlng)
+            rndLatlng = new google.maps.LatLng(randlat, randlng);
+            marker = new google.maps.Marker({
+            position: rndLatlng,
+            animation: google.maps.Animation.DROP
+            });
+            var infowindow = new google.maps.InfoWindow({
+            content: '<div class="pin_info_window"><video width="260" height="260" src="' + response.data[i].videos.low_resolution.url + '" controls></video></div>'
+            });
+            google.maps.event.addListener(marker, 'click', function() {
+
+            infowindow.open(map, marker);
+            });
+            marker.setMap(map);
+        }
+        else {
+            console.log('given location')
+          lat = response.data[i].location.latitude;
+          lng = response.data[i].location.longitude;
+          myLatlng = new google.maps.LatLng(lat, lng);
+
+          marker = new google.maps.Marker({
           position: myLatlng,
           map: map,
           icon: image,
           animation: google.maps.Animation.DROP
-        });
-        var infowindow = new google.maps.InfoWindow({
-         content: '<div class="pin_info_window"><video width="320" height="240" src="' + response.data[i].videos.low_resolution.url + '" controls></video></div>'
-        });
-        google.maps.event.addListener(marker, 'click', function() {
-          infowindow.open(map,marker);
-        });
-        marker.setMap(map);
-        if (videos.length >= 5) {
-          return;
-        } 
+          });
+          var infowindow = new google.maps.InfoWindow({
+          content: '<div class="pin_info_window"><video width="260" height="260" src="' + response.data[i].videos.low_resolution.url + '" controls></video></div>'
+          });
+          google.maps.event.addListener(marker, 'click', function() {
+
+          infowindow.open(map, marker);
+          });
+          marker.setMap(map);
+          // if (videos.length >= 5) {
+          //   return;
+          // } 
+        // }
       }
     }
-  });
+  };
+})
 }
 
 
@@ -414,7 +446,7 @@ function getTag(event) {
     console.log(coordinates);
     console.log(coordinates.searchTerm);
     socket.on('instagram', function () {
-      getVideos(coordinates.searchTerm);
+      getVideos(coordinates);
     });
   });
 }
