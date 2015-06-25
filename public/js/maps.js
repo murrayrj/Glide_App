@@ -320,6 +320,8 @@ google.maps.event.addDomListener(window, 'load', initialize);
 
 // This function return the input value as coordinates and store it on a variables called loc
 function searchFunction(event) {
+  //show the spinner
+  $('#spinner').show();
   var dfr = $.Deferred();
   event.preventDefault();
   searchTagValue = $('#search_tag').val();
@@ -362,6 +364,7 @@ function getVideos(info) {
     console.log(location);
     for (i = 0; i < 20; i++) {
       if (response.data[i].type === "video" && videos.indexOf(response.data[i].id) === -1) {
+        $('#spinner').hide();
         console.log(response.data[i]);
         // $('#video-container').prepend('<video src="' + response.data[i].videos.low_resolution.url + '" controls></video>');
         videos.push(response.data[i].id);
@@ -472,5 +475,9 @@ function getTag(event) {
 $(document).ready(function () {
   searchTagForm.on('submit', searchFunction);
   searchTagForm.on('submit', getTag);
+  // $('#spinner').bind('ajaxSend', function() {
+  //   console.log('inside spinner');
+  //   $(this).show();
+  // })
 });
 
