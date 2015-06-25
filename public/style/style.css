@@ -13,7 +13,7 @@ body {
 #map-canvas {
   width: 100%;
   height: 550px;
-  z-index: -1;
+/*  z-index: -1;*/ /*Richard and Pedro disabled to have acces to the zoom*/
 }
 
 header {
