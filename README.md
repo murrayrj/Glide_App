@@ -25,5 +25,7 @@ Finally run ```nodemon server.js``` and use your ngrok url in the browser to see
 
 If you want to take a look of our mood board / [wireframes](http://pataruco.s3.amazonaws.com/ga/glide/design_research_002.pdf)
  
+##  Take a look
+![](http://pataruco.s3.amazonaws.com/ga/glide/glide-screen.png)
 
 
